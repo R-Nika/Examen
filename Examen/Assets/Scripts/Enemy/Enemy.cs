@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
+    public int health = 100;
     public int damage;
 
     // Start is called before the first frame update
@@ -26,16 +26,24 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        health -= damage;
 
+        if (health <= 0)
+        {
+            Die();
+        }
     }
+
+    private void Die()
+    {
+        // Add death logic here (e.g., play death animation, spawn particles, etc.)
+        Destroy(gameObject);
+    }
+
 
     public void Move()
     {
 
     }
 
-    private void Die()
-    {
-
-    }
 }

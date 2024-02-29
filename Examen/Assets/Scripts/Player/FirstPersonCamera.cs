@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    private float mouseSensitivity;
-    private float rotationSpeed;
-    private float verticalRotationLimit;
-    private float verticalRotation;
+ 
+    private float mouseSensitivity = 2f;
+    private float rotationSpeed = 5f;
+    private float verticalRotationLimit = 80f;
+    private float verticalRotation = 0f;
+
+    private Transform playerTransform; // NEW VARIABLE
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        playerTransform = transform.parent; // Assuming camera is a child of the player
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        HandleMouseLook();
     }
 
     private void HandleMouseLook()
     {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * rotationSpeed;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * rotationSpeed;
 
+        verticalRotation -= mouseY;
+        verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
+
+        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        playerTransform.Rotate(Vector3.up * mouseX);
     }
 }
+
