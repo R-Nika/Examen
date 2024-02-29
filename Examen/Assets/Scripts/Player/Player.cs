@@ -31,6 +31,12 @@ public class Player : MonoBehaviour
         weaponA.SetActive(false);
         weaponB.SetActive(false);
         crowbar.SetActive(false);
+
+    
+        if (rb != null)
+        {
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
     }
 
     // Update is called once per frame
@@ -40,6 +46,8 @@ public class Player : MonoBehaviour
         Crouch();
         Move();
         SelectItem();
+
+        
     }
 
     public void SelectItem()
@@ -66,8 +74,14 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-      
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
+
 
     public void Interact()
     {
@@ -127,16 +141,14 @@ public class Player : MonoBehaviour
             isCrouching = true;
             moveSpeed = crouchSpeed;
 
-            // Lower the camera when crouching
+ 
             Vector3 newCameraPosition = new Vector3(0f, 0.4f, 0f);
-            transform.GetChild(0).localPosition = newCameraPosition; // Assuming the camera is the first child of the player
+            transform.GetChild(0).localPosition = newCameraPosition;
         }
         else
         {
             isCrouching = false;
             moveSpeed = isRunning ? runSpeed : walkSpeed;
-
-            // Reset the camera position
             Vector3 originalCameraPosition = new Vector3(0f, 0.8f, 0f);
             transform.GetChild(0).localPosition = originalCameraPosition;
         }

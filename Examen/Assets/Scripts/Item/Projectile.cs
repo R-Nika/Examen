@@ -6,16 +6,9 @@ public class Projectile : MonoBehaviour
 {
     public int damage;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+      
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,12 +20,9 @@ public class Projectile : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
+        }
 
-            Destroy(gameObject);
-        }
-        else if (collision.transform.CompareTag("Floor"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
+

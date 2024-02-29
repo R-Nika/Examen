@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public int damage;
     public float shootingRange = 10f;
     public float stoppingDistance = 5f;
+    public GameObject projectilePrefab;
+    public Transform projectileSpawn;
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        StartCoroutine(ShootRoutine());
     }
 
     // Update is called once per frame
@@ -35,8 +38,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        // Implement shooting logic here
-        // For example, instantiate bullets, play shooting animation, etc.
+
     }
 
     public virtual void TakeDamage(int damage)
@@ -51,7 +53,6 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        // Add death logic here (e.g., play death animation, spawn particles, etc.)
         Destroy(gameObject);
     }
 
@@ -61,16 +62,36 @@ public class Enemy : MonoBehaviour
 
         if (distanceToPlayer > stoppingDistance)
         {
-            // Move towards the player while maintaining a certain distance
             Vector3 directionToPlayer = player.position - transform.position;
             Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance;
             navMeshAgent.SetDestination(newPosition);
         }
         else
         {
-            // Stop moving if within the stopping distance
             navMeshAgent.ResetPath();
         }
     }
 
+    IEnumerator ShootRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(4f);
+
+            for (int i = 0; i < 6; i++)
+            {
+                ShootProjectile();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
+
+    void ShootProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
+        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+        Vector3 directionToPlayer = (player.position - projectileSpawn.position).normalized;
+        float projectileSpeed = 10f; 
+        projectileRb.AddForce(directionToPlayer * projectileSpeed, ForceMode.VelocityChange);
+    }
 }
