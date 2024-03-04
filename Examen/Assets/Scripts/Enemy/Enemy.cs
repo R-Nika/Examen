@@ -88,10 +88,11 @@ public class Enemy : MonoBehaviour
 
     void ShootProjectile()
     {
+        Debug.Log("Shooting projectile");
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
         Vector3 directionToPlayer = (player.position - projectileSpawn.position).normalized;
-        float projectileSpeed = 10f; 
-        projectileRb.AddForce(directionToPlayer * projectileSpeed, ForceMode.VelocityChange);
+        float projectileSpeed = 20f;
+        projectileRb.AddForce(directionToPlayer * projectileSpeed, ForceMode.Impulse);
     }
 }

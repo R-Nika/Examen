@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     public GameObject weaponA;
     public GameObject weaponB;
     public GameObject crowbar;
-    public int health = 100;
-
+    [SerializeField] private int health = 100;
+    public TMP_Text healthText;
+    
     [SerializeField]private GameObject currentWeapon;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int runSpeed = 10;
@@ -42,13 +44,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthText.text = health.ToString();
+        Debug.Log(health);
+
+
         Run();
         Crouch();
         Move();
         SelectItem();
 
-        
     }
+
 
     public void SelectItem()
     {
@@ -74,6 +80,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
+        Debug.Log("Player took damage: " + amount);
+
         health -= amount;
 
         if (health <= 0)
