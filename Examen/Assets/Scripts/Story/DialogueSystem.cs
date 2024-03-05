@@ -7,14 +7,10 @@ using TMPro;
 public class DialogueSystem : MonoBehaviour
 {
     public TMP_Text dialogueText;
-    public GameObject dialoguePanel;
     private string[] currentDialogues;
    [SerializeField] private int currentDialogueIndex;
-    public bool isDialoguing = false;
+    private bool isDialoguing = false;
     private bool eKeyPressedLastFrame = false;
-
-    public bool dialogueFinished = false;
-
 
     // Singleton pattern
     public static DialogueSystem Instance { get; private set; }
@@ -31,29 +27,12 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        dialoguePanel.SetActive(false);
-    }
-
     public void StartDialogue(string[] dialogues)
     {
-        dialoguePanel.SetActive(true);
         currentDialogues = dialogues;
-        currentDialogueIndex = 0;  // Reset the index when starting a new dialogue
-        dialogueFinished = false;
+       // currentDialogueIndex = 0; // Reset index when starting a new dialogue
         isDialoguing = true;
         eKeyPressedLastFrame = false; // Reset the flag
-
-        // Ensure the array is not null before accessing it
-        if (currentDialogues != null && currentDialogues.Length > 0)
-        {
-            dialogueText.text = currentDialogues[currentDialogueIndex];
-        }
-        else
-        {
-            Debug.LogWarning("Dialogue array is null or empty.");
-        }
     }
 
     void Update()
@@ -76,15 +55,16 @@ public class DialogueSystem : MonoBehaviour
         if (currentDialogueIndex < currentDialogues.Length)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
-            currentDialogueIndex++; // Increment the index after updating the text
+            currentDialogueIndex++;
+
+            Debug.Log(currentDialogueIndex);
+            Debug.Log("It works");
         }
         else
         {
             // End of dialogues
             isDialoguing = false;
-            dialoguePanel.SetActive(false);
-
-            dialogueFinished = true;
+            dialogueText.text = "End of dialogues";
             currentDialogueIndex = 0;
         }
     }

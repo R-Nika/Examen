@@ -6,10 +6,10 @@ TagManager:
   tags:
   - Floor
   - Enemy
-  - Farmer
-  - Phone
-  - Cafe
-  - Police
+  - NPCFarmer
+  - NPCCafe
+  - NPCPolice
+  - NPCPhone
   layers:
   - Default
   - TransparentFX
