@@ -108,20 +108,15 @@ public class Player : MonoBehaviour
 
         rb.MovePosition(rb.position + newRotation * movement);
 
-        int jumpcount = 0;
-        int maxJumpcount = 2;
-
-        if (Input.GetButtonDown("Jump") && IsGrounded() && canJump && jumpcount < maxJumpcount)
+        if (Input.GetButtonDown("Jump") && IsGrounded() && canJump)  
         {
-            jumpcount++;
-            isJumping = true;
+            isJumping = true;  
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            canJump = false;
+            canJump = false; 
         }
 
         if (IsGrounded())
         {
-            jumpcount = 0;
             isJumping = false;
             canJump = true;
         }
@@ -129,7 +124,7 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.5f);
+        return Physics.Raycast(transform.position, Vector3.down, 1f);
     }
 
 
@@ -166,7 +161,6 @@ public class Player : MonoBehaviour
             transform.GetChild(0).localPosition = originalCameraPosition;
         }
     }
-
 
     private void Die()
     {

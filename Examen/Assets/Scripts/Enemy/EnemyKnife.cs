@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyKnife : Enemy
 {
+    public override void Attack()
+    {
+
+    }
 
     public void KnifeAttack()
     {
