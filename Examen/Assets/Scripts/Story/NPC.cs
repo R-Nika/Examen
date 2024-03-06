@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     private bool inRange = false;
     public DialogueSystem dialogue;
 
+
     [HideInInspector] public bool farmerActive = false;
     [HideInInspector] public bool cafeActive = false;
     [HideInInspector] public bool phoneActive = false;

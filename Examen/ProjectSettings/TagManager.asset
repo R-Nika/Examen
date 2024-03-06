@@ -10,6 +10,7 @@ TagManager:
   - Farmer
   - Cafe
   - ItemHealth
+  - SecretDoor
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,7 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
+
     public TMP_Text dialogueText;
     public GameObject dialoguePanel;
     private string[] currentDialogues;

@@ -5,31 +5,38 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    [Header("Weapon & Currency Settings")]
+    public int currency;
     public GameObject weaponA;
     public GameObject weaponB;
     public GameObject crowbar;
-    [SerializeField] private int health = 100;
+    [SerializeField] private GameObject currentWeapon;
+
+    [Header("UI Settings")]
     public TMP_Text healthText;
     public TMP_Text arrestText;
+    public TMP_Text currencyText;
 
-    [SerializeField]private GameObject currentWeapon;
-    [SerializeField] private int moveSpeed = 5;
-    [SerializeField] private int runSpeed = 10;
-    [SerializeField] private int crouchSpeed = 2;
+    [Header("Player Settings")]
+    [SerializeField] private int health = 100;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private bool isCrouching = false;
 
-    // new variables not in classdiagram
+
+    [Header("Movement Settings")]
+    [SerializeField] private int moveSpeed = 5;
+    [SerializeField] private int walkSpeed = 5;
+    [SerializeField] private int runSpeed = 10;
+    [SerializeField] private bool isCrouching = false;
+    [SerializeField] private int crouchSpeed = 2;
     [SerializeField] private float jumpForce = 4f; 
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool canJump = true; 
     [SerializeField] private bool isRunning = false;
-    [SerializeField] private int walkSpeed = 5;
+
+    [Header("Interaction Settings")]
     [SerializeField] private float interactionRange = 3f;
 
-    public int currency;
-    public TMP_Text currencyText;
-
+   
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +47,6 @@ public class Player : MonoBehaviour
         weaponB.SetActive(false);
         crowbar.SetActive(false);
         arrestText.enabled = false;
-
 
         if (rb != null)
         {
@@ -65,8 +71,6 @@ public class Player : MonoBehaviour
             ArrestClosestEnemy();
             Interact();
         }
-
-     
     }
 
 
@@ -92,6 +96,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region Health 
+
     public void TakeDamage(int amount)
     {
         Debug.Log("Player took damage: " + amount);
@@ -104,7 +110,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Die()
+    {
+        Debug.Log("Player has died!");
+    }
+    #endregion
 
+    #region Movement
     private void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -175,6 +187,10 @@ public class Player : MonoBehaviour
             transform.GetChild(0).localPosition = originalCameraPosition;
         }
     }
+
+    #endregion
+
+    #region Interactions
 
     public void ArrestClosestEnemy()
     {
@@ -261,8 +277,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Die()
-    {
-        Debug.Log("Player has died!");
-    }
+    #endregion
+
+    
 }

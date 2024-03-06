@@ -68,4 +68,10 @@ public class EnemyBoss : Enemy
             }
         }
     }
+
+    public override void Die()
+    {
+        base.Die();
+        // End scene
+    }
 }
