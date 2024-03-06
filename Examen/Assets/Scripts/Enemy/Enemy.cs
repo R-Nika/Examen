@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class Enemy : MonoBehaviour
     public float sightRange = 10f; // New sight range variable
     public Transform player;
     private NavMeshAgent navMeshAgent;
+    public Slider healthSlider;
+
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -29,6 +33,7 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         health -= damage;
+        healthSlider.value = health;
 
         if (health <= 0)
         {
