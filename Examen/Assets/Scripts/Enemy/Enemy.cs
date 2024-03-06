@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public int health = 100;
     public int damage;
     public float stoppingDistance = 5f;
-    public float sightRange = 10f; // New sight range variable
+    public float sightRange = 10f;
     public Transform player;
     private NavMeshAgent navMeshAgent;
     public Slider healthSlider;
@@ -19,8 +19,18 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+       // player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("Player GameObject not found with tag 'Player'. Make sure the player has the correct tag.");
+        }
     }
 
     // Update is called once per frame
@@ -79,4 +89,13 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(2f);
       
     }
+
+
+    public void Arrest()
+    {
+        Debug.Log("Arrested");
+
+        Destroy(gameObject);
+    }
+
 }

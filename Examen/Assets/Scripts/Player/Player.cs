@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     public GameObject crowbar;
     [SerializeField] private int health = 100;
     public TMP_Text healthText;
-    
+    public TMP_Text arrestText;
+
     [SerializeField]private GameObject currentWeapon;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int runSpeed = 10;
@@ -24,6 +25,11 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canJump = true; 
     [SerializeField] private bool isRunning = false;
     [SerializeField] private int walkSpeed = 5;
+    [SerializeField] private float interactionRange = 3f;
+
+    public int currency;
+    public TMP_Text currencyText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +39,9 @@ public class Player : MonoBehaviour
         weaponA.SetActive(false);
         weaponB.SetActive(false);
         crowbar.SetActive(false);
+        arrestText.enabled = false;
 
-    
+
         if (rb != null)
         {
             rb.interpolation = RigidbodyInterpolation.Interpolate;
@@ -46,13 +53,20 @@ public class Player : MonoBehaviour
     {
         healthText.text = health.ToString();
         Debug.Log(health);
-
+        currencyText.text = currency.ToString();
 
         Run();
         Crouch();
         Move();
         SelectItem();
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ArrestClosestEnemy();
+            Interact();
+        }
+
+     
     }
 
 
@@ -91,11 +105,6 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Interact()
-    {
-    
-    }
- 
     private void Move()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -167,6 +176,90 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ArrestClosestEnemy()
+    {
+        int arrestRange = 1;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
+
+        foreach (var collider in colliders)
+        {
+            Enemy enemy = collider.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.Arrest();
+                currency += 10;
+                
+                StartCoroutine(ArrestText());
+                break;
+            }
+        }
+    }
+
+    public IEnumerator ArrestText()
+    {
+        arrestText.enabled = true;
+        yield return new WaitForSeconds(2f);
+        arrestText.enabled = false;
+    }
+
+    public void Interact()
+    {
+      
+            Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRange);
+
+            if (colliders.Length > 0)
+            {
+                Debug.Log("Interact called. Colliders detected: " + colliders.Length);
+
+                foreach (var collider in colliders)
+                {
+                    Debug.Log("Collider tag: " + collider.tag);
+
+                    if (collider.CompareTag("ItemHealth"))
+                    {
+                        Debug.Log("ItemHealth detected!");
+
+                        // Check if the collider has the Item script
+                        Item item = collider.GetComponent<Item>();
+
+                        if (item != null)
+                        {
+                            Debug.Log("Item script found!");
+
+                            ConsumeItem(item);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Interact called. No colliders detected.");
+            }
+        
+    }
+
+    void ConsumeItem(Item item)
+    {
+        if (item.itemtype == ItemType.HealthItem)
+        {
+            if (health < 100)  // Check if health is less than the maximum value
+            {
+                int healthToAdd = Mathf.Min(100 - health, item.healthModifyer);
+                health += healthToAdd;
+
+                // Disable the item after consumption
+                item.gameObject.SetActive(false);
+
+                Debug.Log("Health increased by " + healthToAdd + ". Current health: " + health);
+            }
+            else
+            {
+                Debug.Log("Health is already at the maximum. Cannot consume health item.");
+            }
+        }
+    }
 
     private void Die()
     {
