@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int walkSpeed = 5;
+            
     [SerializeField] private int runSpeed = 10;
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private int crouchSpeed = 2;
@@ -32,6 +33,18 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool canJump = true; 
     [SerializeField] private bool isRunning = false;
+
+    private int jumpcount = 0;  // Move jumpcount outside the Move method
+    private int maxJumpcount = 2;
+
+
+    private bool isWalking = false;
+    private float movementThreshold = 0.01f;
+
+
+    [Header("Animation Settings")]
+    private Animator playerAnimator;
+
 
     [Header("Interaction Settings")]
     [SerializeField] private float interactionRange = 3f;
@@ -42,11 +55,18 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
+
         currentWeapon = weaponA;
+
         weaponA.SetActive(false);
         weaponB.SetActive(false);
         crowbar.SetActive(false);
         arrestText.enabled = false;
+
+        playerAnimator.SetBool("Idle", true);
+        playerAnimator.SetBool("Walking", false);
+
 
         if (rb != null)
         {
@@ -61,16 +81,39 @@ public class Player : MonoBehaviour
         Debug.Log(health);
         currencyText.text = currency.ToString();
 
+        Move();
         Run();
         Crouch();
-        Move();
         SelectItem();
+
+        AnimationManager();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             ArrestClosestEnemy();
             Interact();
         }
+
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(PlayJumpAnimation());
+        }
+    }
+
+    IEnumerator PlayJumpAnimation()
+    {
+        isJumping = true;
+
+        playerAnimator.SetBool("Jumping", true);
+        Debug.Log("Jump button pressed");
+
+        // Wait for 0.3 seconds (adjust the time as needed)
+        yield return new WaitForSeconds(0.3f);
+
+        playerAnimator.SetBool("Jumping", false);
+
+        isJumping = false;
     }
 
 
@@ -125,45 +168,74 @@ public class Player : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0, vertical);
         movement = movement.normalized * moveSpeed * Time.deltaTime;
 
+        isWalking = (new Vector3(horizontal, 0, vertical).magnitude > movementThreshold); // Check if the movement magnitude is greater than the threshold
+
+        Debug.Log("Walking: " + isWalking);
+
         Quaternion newRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
 
         rb.MovePosition(rb.position + newRotation * movement);
 
-        int jumpcount = 0;
-        int maxJumpcount = 2;
-
-        if (Input.GetButtonDown("Jump") && IsGrounded() && canJump && jumpcount < maxJumpcount)
+        if (Input.GetButtonDown("Jump") && canJump && jumpcount <= maxJumpcount)
         {
+            Debug.Log("Jump");
             jumpcount++;
             isJumping = true;
+            
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            canJump = false;
-        }
 
+        }
+      
         if (IsGrounded())
         {
+            Debug.Log("Grounded");
+            // jumpcount should not be reset here
             jumpcount = 0;
-            isJumping = false;
+           // isJumping = false;
+            
             canJump = true;
+        }
+    }
+  
+    private bool isGrounded;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if the collision is with an object having the "floor" tag
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        // Reset the grounded state when leaving the collision with the "floor" tag
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isGrounded = false;
         }
     }
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.5f);
+        return isGrounded;
     }
-
 
     private void Run()
     {
+
+
         if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             isRunning = true;
+         
             moveSpeed = runSpeed;
         }
         else
         {
             isRunning = false;
+        
             moveSpeed = walkSpeed;
         }
     }
@@ -172,23 +244,81 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftControl) && !isRunning)
         {
-            isCrouching = true;
-            moveSpeed = crouchSpeed;
+            if (!isCrouching)
+            {
+                isCrouching = true;
+                moveSpeed = crouchSpeed;
 
- 
-            Vector3 newCameraPosition = new Vector3(0f, 0.4f, 0f);
-            transform.GetChild(0).localPosition = newCameraPosition;
+                Vector3 newCameraPosition = new Vector3(0f, 1.6f, 0.1f); // Camera height when crouching // hardcoded
+                transform.GetChild(0).localPosition = newCameraPosition;
+            }
         }
-        else
+        else if (isCrouching) // Check if currently crouching
         {
             isCrouching = false;
             moveSpeed = isRunning ? runSpeed : walkSpeed;
-            Vector3 originalCameraPosition = new Vector3(0f, 0.8f, 0f);
+
+            Vector3 originalCameraPosition = new Vector3(0f, 1.8f, 0.1f); // NOT HARDCODED
             transform.GetChild(0).localPosition = originalCameraPosition;
         }
+
     }
 
     #endregion
+
+
+    public void AnimationManager()
+    {
+        // Walking and Idle States
+        if (isWalking)
+        {
+            playerAnimator.SetBool("Walking", true);
+            playerAnimator.SetBool("Idle", false);
+        }
+        else
+        {
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("Idle", true);
+        }
+
+        // Running State
+        if (isRunning)
+        {
+            playerAnimator.SetBool("Running", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Running", false);
+        }
+
+        
+        // Crouch States
+        if (isCrouching && isWalking)
+        {
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("CrouchWalk", true);
+            playerAnimator.SetBool("Crouching", false);
+            playerAnimator.SetBool("Idle", false);
+        }
+        else if (!isCrouching && isWalking)
+        {
+            playerAnimator.SetBool("Walking", true);
+            playerAnimator.SetBool("CrouchWalk", false);
+            playerAnimator.SetBool("Crouching", false);
+            playerAnimator.SetBool("Idle", false);
+        }
+        else if (isCrouching)
+        {
+            playerAnimator.SetBool("Walking", false);
+            playerAnimator.SetBool("CrouchWalk", false);
+            playerAnimator.SetBool("Crouching", true);
+            playerAnimator.SetBool("Idle", false);
+        }
+        else
+        {
+            playerAnimator.SetBool("Crouching", false);
+        }
+    }
 
     #region Interactions
 
