@@ -6,32 +6,16 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-
+    [Header("Dialogue Settings")]
+    public bool dialogueFinished = false;
+    public bool isDialoguing = false;
     public TMP_Text dialogueText;
     public GameObject dialoguePanel;
+
     private string[] currentDialogues;
-   [SerializeField] private int currentDialogueIndex;
-    public bool isDialoguing = false;
+    private int currentDialogueIndex;
     private bool eKeyPressedLastFrame = false;
-
-    public bool dialogueFinished = false;
-
-
-    // Singleton pattern
-    public static DialogueSystem Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
+  
     private void Start()
     {
         dialoguePanel.SetActive(false);
@@ -41,12 +25,11 @@ public class DialogueSystem : MonoBehaviour
     {
         dialoguePanel.SetActive(true);
         currentDialogues = dialogues;
-        currentDialogueIndex = 0;  // Reset the index when starting a new dialogue
+        currentDialogueIndex = 0; 
         dialogueFinished = false;
         isDialoguing = true;
-        eKeyPressedLastFrame = false; // Reset the flag
+        eKeyPressedLastFrame = false; 
 
-        // Ensure the array is not null before accessing it
         if (currentDialogues != null && currentDialogues.Length > 0)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
@@ -59,7 +42,6 @@ public class DialogueSystem : MonoBehaviour
 
     void Update()
     {
-        // Check for 'E' key outside of the Update method
         if (isDialoguing)
         {
             if (Input.GetKeyDown(KeyCode.E) && !eKeyPressedLastFrame)
@@ -67,8 +49,6 @@ public class DialogueSystem : MonoBehaviour
                 ContinueDialogue();
             }
         }
-
-        // Update the flag for the next frame
         eKeyPressedLastFrame = Input.GetKey(KeyCode.E);
     }
 
@@ -77,14 +57,12 @@ public class DialogueSystem : MonoBehaviour
         if (currentDialogueIndex < currentDialogues.Length)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
-            currentDialogueIndex++; // Increment the index after updating the text
+            currentDialogueIndex++; 
         }
         else
-        {
-            // End of dialogues
+        {           
             isDialoguing = false;
             dialoguePanel.SetActive(false);
-
             dialogueFinished = true;
             currentDialogueIndex = 0;
         }

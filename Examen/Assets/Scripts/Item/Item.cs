@@ -9,19 +9,8 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
+    [Header("Item Settings")]
     public string itemName;
     public ItemType itemtype;
     public int healthModifyer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

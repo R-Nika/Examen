@@ -17,7 +17,6 @@ public class Crowbar : MonoBehaviour
     public void UseCrowbar()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, range);
-
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("SecretDoor"))

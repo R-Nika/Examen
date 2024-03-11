@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyBoss : Enemy
 {
+    [Header("Enemy Boss Settings")]
+    public float summonInterval = 3f; 
+    public float shootingRange = 10f;
+    public int bulletsPerShot = 4;
+    public Transform projectileSpawn;
     public GameObject[] minion;
+    public GameObject projectilePrefab;
 
-    private bool summoningMinions = false;
-    public float summonInterval = 3f; // Time interval between summoning minions
-
+    private bool isShooting = false;
+    private bool isSummoningMinions = false;
+    
     public override void Start()
     {
         base.Start();
@@ -18,32 +25,70 @@ public class EnemyBoss : Enemy
     public override void Update()
     {
         base.Update();
-
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer <= sightRange && !summoningMinions)
+        if (distanceToPlayer <= sightRange && !isSummoningMinions)
         {
-            // Summon minions
             StartCoroutine(SummonMinionsRoutine());
+        }
+
+        if (distanceToPlayer <= shootingRange && !isShooting)
+        {
+            StartCoroutine(ShootRoutine());
+        }
+        else if (distanceToPlayer > shootingRange && isShooting)
+        {
+            StopShooting();
         }
     }
 
     private IEnumerator SummonMinionsRoutine()
     {
-        summoningMinions = true;
-
+        isSummoningMinions = true;
         SummonMinions();
         yield return new WaitForSeconds(summonInterval);
+        isSummoningMinions = false;
+    }
 
-        summoningMinions = false;
+    private IEnumerator ShootRoutine()
+    {
+        isShooting = true;
+        while (isShooting)
+        {
+            for (int i = 0; i < bulletsPerShot; i++)
+            {
+                ShootProjectile(projectileSpawn);
+                yield return new WaitForSeconds(1f); 
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void StopShooting()
+    {
+        isShooting = false;
+        isSummoningMinions = false; 
+        StopCoroutine(ShootRoutine());
+
+        enemyAnimator.SetBool("ThompsonShoot", false);
+    }
+
+    void ShootProjectile(Transform spawnPoint)
+    {
+        enemyAnimator.SetBool("ThompsonShoot", true);
+
+        GameObject projectile = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
+        Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+        Vector3 directionToPlayer = (player.position - spawnPoint.position).normalized;
+        float projectileSpeed = 20f;
+        projectileRb.AddForce(directionToPlayer * projectileSpeed, ForceMode.Impulse);
     }
 
     public void SummonMinions()
     {
-     
-        
+        int numberOfMinionsToSpawn = Random.Range(3, 7); 
 
-        for (int i = 0; i < minion.Length; i++)
+        for (int i = 0; i < numberOfMinionsToSpawn; i++)
         {
             GameObject selectedMinionPrefab = minion[Random.Range(0, minion.Length)];
 
@@ -70,6 +115,6 @@ public class EnemyBoss : Enemy
     public override void Die()
     {
         base.Die();
-        // End scene
+        SceneManager.LoadScene("Finished");
     }
 }

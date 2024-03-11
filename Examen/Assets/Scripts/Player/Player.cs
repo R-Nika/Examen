@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     public GameObject weaponThompson;
     public GameObject weaponRevolver;
     public GameObject crowbar;
-    [SerializeField] private GameObject currentWeapon;
+    private GameObject currentWeapon;
 
     [Header("UI Settings")]
     public TMP_Text healthText;
@@ -20,12 +21,17 @@ public class Player : MonoBehaviour
     public GameObject ammoThompsonText;
     public GameObject ammoRevolverText;
 
+    public GameObject gameOverScreen;
+
     [Header("Player Settings")]
-    [SerializeField] private int health = 100;
-    [SerializeField] private Rigidbody rb;
+    private int health = 100;
+    private Rigidbody rb;
 
 
     [Header("Movement Settings")]
+    public Camera mainCamera;
+    public Vector3 cameraPosNormal = new Vector3(0,1.8f,1);
+    public Vector3 cameraPosCrouch = new Vector3(0,1.6f,1);
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int walkSpeed = 5;
             
@@ -37,24 +43,19 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canJump = true; 
     [SerializeField] private bool isRunning = false;
 
-    public Camera mainCamera;
-
-    private int jumpcount = 0;  // Move jumpcount outside the Move method
+    private int jumpcount = 0; 
     private int maxJumpcount = 2;
-
 
     private bool isWalking = false;
     private float movementThreshold = 0.01f;
 
+    private bool isGrounded;
 
     [Header("Animation Settings")]
     private Animator playerAnimator;
 
-
     [Header("Interaction Settings")]
     [SerializeField] private float interactionRange = 3f;
-
-   
 
     // Start is called before the first frame update
     void Start()
@@ -70,26 +71,21 @@ public class Player : MonoBehaviour
         weaponThompson.SetActive(false);
         weaponRevolver.SetActive(false);
         crowbar.SetActive(false);
+
         arrestText.enabled = false;
+
+        gameOverScreen.SetActive(false);
 
         playerAnimator.SetBool("Idle", true);
         playerAnimator.SetBool("Walking", false);
-
-
-        if (rb != null)
-        {
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
         healthText.text = health.ToString();
-        Debug.Log(health);
         currencyText.text = currency.ToString();
 
-        
         Move();
         Run();
         Crouch();
@@ -102,27 +98,27 @@ public class Player : MonoBehaviour
             ArrestClosestEnemy();
             Interact();
         }
+
         if (Input.GetButtonDown("Jump"))
         {
             StartCoroutine(PlayJumpAnimation());
         }
 
-
+        if (health <= 0)
+        {          
+            Die();
+        }
 
     }
 
     IEnumerator PlayJumpAnimation()
     {
         isJumping = true;
-
         playerAnimator.SetBool("Jumping", true);
-        Debug.Log("Jump button pressed");
 
-        // Wait for 0.3 seconds (adjust the time as needed)
         yield return new WaitForSeconds(0.3f);
 
         playerAnimator.SetBool("Jumping", false);
-
         isJumping = false;
     }
 
@@ -132,19 +128,21 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentWeapon.SetActive(false);
-            currentWeapon = weaponThompson;
-
+           
             ammoThompsonText.SetActive(true);
             ammoRevolverText.SetActive(false);
             
             playerAnimator.SetBool("GunHolding", false);
             playerAnimator.SetBool("ThompsonHolding", true);
 
+            currentWeapon = weaponThompson;
+
             currentWeapon.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentWeapon.SetActive(false);
+
             ammoThompsonText.SetActive(false);
             ammoRevolverText.SetActive(true);
           
@@ -159,13 +157,13 @@ public class Player : MonoBehaviour
         {
             currentWeapon.SetActive(false);
 
+            ammoThompsonText.SetActive(false);
+            ammoRevolverText.SetActive(false);
+
             playerAnimator.SetBool("GunHolding", false);
             playerAnimator.SetBool("ThompsonHolding", false);
 
             currentWeapon = crowbar;
-
-            ammoThompsonText.SetActive(false);
-            ammoRevolverText.SetActive(false);
 
             currentWeapon.SetActive(true);
         }
@@ -175,19 +173,13 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("Player took damage: " + amount);
-
         health -= amount;
-
-        if (health <= 0)
-        {
-            Die();
-        }
     }
 
     private void Die()
     {
         Debug.Log("Player has died!");
+        SceneManager.LoadScene("GameOver");
     }
     #endregion
 
@@ -215,25 +207,18 @@ public class Player : MonoBehaviour
             isJumping = true;
             
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
         }
       
         if (IsGrounded())
         {
             Debug.Log("Grounded");
-            // jumpcount should not be reset here
             jumpcount = 0;
-           // isJumping = false;
-            
             canJump = true;
         }
     }
-  
-    private bool isGrounded;
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the collision is with an object having the "floor" tag
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = true;
@@ -241,8 +226,7 @@ public class Player : MonoBehaviour
     }
 
     private void OnCollisionExit(Collision collision)
-    {
-        // Reset the grounded state when leaving the collision with the "floor" tag
+    { 
         if (collision.gameObject.CompareTag("Floor"))
         {
             isGrounded = false;
@@ -256,18 +240,14 @@ public class Player : MonoBehaviour
 
     private void Run()
     {
-
-
         if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             isRunning = true;
-         
             moveSpeed = runSpeed;
         }
         else
         {
             isRunning = false;
-        
             moveSpeed = walkSpeed;
         }
     }
@@ -280,17 +260,15 @@ public class Player : MonoBehaviour
             {
                 isCrouching = true;
                 moveSpeed = crouchSpeed;
-
-                Vector3 newCameraPosition = new Vector3(0f, 1.8f, 0.1f); // Camera height when crouching // hardcoded
+                Vector3 newCameraPosition = cameraPosNormal;
                 mainCamera.transform.position = newCameraPosition;
             }
         }
-        else if (isCrouching) // Check if currently crouching
+        else if (isCrouching) 
         {
             isCrouching = false;
             moveSpeed = isRunning ? runSpeed : walkSpeed;
-
-            Vector3 originalCameraPosition = new Vector3(0f, 1.6f, 0.1f); // NOT HARDCODED
+            Vector3 originalCameraPosition = cameraPosCrouch;
             mainCamera.transform.position = originalCameraPosition;
         }
 
@@ -298,104 +276,35 @@ public class Player : MonoBehaviour
 
     #endregion
 
-
     public void AnimationManager()
     {
-        // Walking and Idle States
-        if (isWalking)
-        {
-            playerAnimator.SetBool("Walking", true);
-            playerAnimator.SetBool("Idle", false);
-        }
-        else
-        {
-            playerAnimator.SetBool("Walking", false);
-            playerAnimator.SetBool("Idle", true);
-        }
+        playerAnimator.SetBool("Walking", isWalking);
+        playerAnimator.SetBool("Idle", !isWalking);
 
-        // Running State
-        if (isRunning)
-        {
-            playerAnimator.SetBool("Running", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("Running", false);
-        }
+        playerAnimator.SetBool("Running", isRunning);
 
-        
-        // Crouch States
-        if (isCrouching && isWalking)
-        {
-            playerAnimator.SetBool("Walking", false);
-            playerAnimator.SetBool("CrouchWalk", true);
-            playerAnimator.SetBool("Crouching", false);
-            playerAnimator.SetBool("Idle", false);
-        }
-        else if (!isCrouching && isWalking)
-        {
-            playerAnimator.SetBool("Walking", true);
-            playerAnimator.SetBool("CrouchWalk", false);
-            playerAnimator.SetBool("Crouching", false);
-            playerAnimator.SetBool("Idle", false);
-        }
-        else if (isCrouching)
-        {
-            playerAnimator.SetBool("Walking", false);
-            playerAnimator.SetBool("CrouchWalk", false);
-            playerAnimator.SetBool("Crouching", true);
-            playerAnimator.SetBool("Idle", false);
-        }
-        else
-        {
-            playerAnimator.SetBool("Crouching", false);
-        }
+        playerAnimator.SetBool("Crouching", isCrouching);
+        playerAnimator.SetBool("CrouchWalk", isCrouching && isWalking);
 
+        UpdateWeaponAnimation(weaponThompson, "ThompsonReload", "ThompsonShoot");
 
+        UpdateWeaponAnimation(weaponRevolver, "GunReload", "GunShoot");
+    }
 
-        
-        if (weaponThompson.GetComponent<Weapon>().reload)
+    private void UpdateWeaponAnimation(GameObject weapon, string reloadParam, string shootParam)
+    {
+        Weapon weaponComponent = weapon.GetComponent<Weapon>();
+
+        if (weaponComponent != null)
         {
-            playerAnimator.SetBool("ThompsonReload", true);
-            Debug.Log("Anim Thompson Reload");
-        }
-        else
-        {
-            playerAnimator.SetBool("ThompsonReload", false);
-        }
+            playerAnimator.SetBool(reloadParam, weaponComponent.reload);
+            playerAnimator.SetBool(shootParam, weaponComponent.shoot);
 
-        if (weaponThompson.GetComponent<Weapon>().shoot)
-        {
-            playerAnimator.SetBool("ThompsonShoot", true);
+            if (weaponComponent.reload)
+            {
+                Debug.Log($"Anim {weapon.name} Reload");
+            }
         }
-        else
-        {
-            playerAnimator.SetBool("ThompsonShoot", false);
-
-        }
-
-
-
-        if (weaponRevolver.GetComponent<Weapon>().reload)
-        {
-            playerAnimator.SetBool("GunReload", true);
-            Debug.Log("Anim Revolver Reload");
-        }
-        else
-        {
-            playerAnimator.SetBool("GunReload", false);
-        }
-
-        if (weaponRevolver.GetComponent<Weapon>().shoot)
-        {
-            playerAnimator.SetBool("GunShoot", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("GunShoot", false);
-
-        }
-
     }
 
     #region Interactions
@@ -405,7 +314,6 @@ public class Player : MonoBehaviour
         int arrestRange = 1;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
-
         foreach (var collider in colliders)
         {
             Enemy enemy = collider.GetComponent<Enemy>();
@@ -413,8 +321,7 @@ public class Player : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Arrest();
-                currency += 10;
-                
+                currency += 10;               
                 StartCoroutine(ArrestText());
                 break;
             }
@@ -430,53 +337,38 @@ public class Player : MonoBehaviour
 
     public void Interact()
     {
-      
-            Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRange);
-
-            if (colliders.Length > 0)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRange);
+        if (colliders.Length > 0)
+        {
+            foreach (var collider in colliders)
             {
-                Debug.Log("Interact called. Colliders detected: " + colliders.Length);
-
-                foreach (var collider in colliders)
+                if (collider.CompareTag("ItemHealth"))
                 {
-                    Debug.Log("Collider tag: " + collider.tag);
-
-                    if (collider.CompareTag("ItemHealth"))
+                    Item item = collider.GetComponent<Item>();
+                    if (item != null)
                     {
-                        Debug.Log("ItemHealth detected!");
-
-                        // Check if the collider has the Item script
-                        Item item = collider.GetComponent<Item>();
-
-                        if (item != null)
-                        {
-                            Debug.Log("Item script found!");
-
-                            ConsumeItem(item);
-                        }
+                        ConsumeItem(item);
                     }
                 }
             }
-            else
-            {
-                Debug.Log("Interact called. No colliders detected.");
-            }
-        
+        }
+        else
+        {
+            Debug.Log("Interact called. No colliders detected.");
+        }
+
     }
 
     void ConsumeItem(Item item)
     {
         if (item.itemtype == ItemType.HealthItem)
         {
-            if (health < 100)  // Check if health is less than the maximum value
+            if (health < 100)  
             {
                 int healthToAdd = Mathf.Min(100 - health, item.healthModifyer);
                 health += healthToAdd;
 
-                // Disable the item after consumption
                 item.gameObject.SetActive(false);
-
-                Debug.Log("Health increased by " + healthToAdd + ". Current health: " + health);
             }
             else
             {

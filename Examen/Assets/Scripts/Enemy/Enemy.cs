@@ -7,26 +7,26 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy Base Settings")]
     public int health = 100;
     public int damage;
     public float stoppingDistance = 5f;
     public float sightRange = 10f;
-    public Transform player;
-    private NavMeshAgent navMeshAgent;
-    public Slider healthSlider;
-
-    public Animator enemyAnimator;
     public bool isWalking = false;
+    public Transform player;
+    public Slider healthSlider;
+    public Animator enemyAnimator;
 
+    private NavMeshAgent navMeshAgent;
 
     // Start is called before the first frame update
     public virtual void Start()
-    {
-       // player = GameObject.FindGameObjectWithTag("Player").transform;
+    {       
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();
 
         GameObject playerObject = GameObject.FindWithTag("Player");
+
         if (playerObject != null)
         {
             player = playerObject.transform;
@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
     public virtual void Update()
     {
         MoveAndAttack();
-        
     }
 
     public virtual void TakeDamage(int damage)
@@ -69,7 +68,6 @@ public class Enemy : MonoBehaviour
             if (distanceToPlayer <= stoppingDistance)
             {
                 navMeshAgent.ResetPath();
-                // Not walking, set the animation bool to false
                 isWalking = false;
                 enemyAnimator.SetBool("Walking", false);
             }
@@ -79,7 +77,8 @@ public class Enemy : MonoBehaviour
                 Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance;
                 navMeshAgent.SetDestination(newPosition);
 
-                // Walking, set the animation bool to true
+                transform.LookAt(player.position);
+
                 isWalking = true;
                 enemyAnimator.SetBool("Walking", true);
             }
@@ -87,27 +86,19 @@ public class Enemy : MonoBehaviour
         else
         {
             navMeshAgent.ResetPath();
-            // Not walking, set the animation bool to false
             isWalking = false;
             enemyAnimator.SetBool("Walking", false);
         }
-
-        // Update the animation bool in the Animator
-      
     }
 
     public virtual IEnumerator AttackRoutine()
     {
-            yield return new WaitForSeconds(2f);
-      
+        yield return new WaitForSeconds(2f);
     }
-
 
     public void Arrest()
     {
         Debug.Log("Arrested");
-
         Destroy(gameObject);
     }
-
 }

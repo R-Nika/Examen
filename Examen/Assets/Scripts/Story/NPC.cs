@@ -5,30 +5,31 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
+    [Header("Interaction Settings")]
     public string[] npcDialogues;
     public float interactionRadius = 3f; // Adjust the radius as needed
     public TMP_Text pressE;
-
-    private bool inRange = false;
     public DialogueSystem dialogue;
 
+    private bool interactionTriggered = false;
+    private bool inRange = false;
 
+    [Header("NPC Settings")]
     [HideInInspector] public bool farmerActive = false;
     [HideInInspector] public bool cafeActive = false;
     [HideInInspector] public bool phoneActive = false;
     [HideInInspector] public bool policeActive = false;
 
-    public AudioSource audio;
-
-    private bool interactionTriggered = false;
+    [Header("Audio Settings")]
+    public AudioSource audioNPC;
 
     private void Start()
     {
         pressE.enabled = false;
     }
+
     private void Update()
     {
-        // Check if the player is in range when the 'E' key is pressed
         CheckPlayerInRange();
         if (inRange)
         {
@@ -43,10 +44,8 @@ public class NPC : MonoBehaviour
     private void CheckPlayerInRange()
     {
         if (!interactionTriggered)
-        {
-            // Check if the player is in range using Physics.OverlapSphere
+        {          
             Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
-
             foreach (Collider collider in colliders)
             {
                 if (collider.CompareTag("Player"))
@@ -56,19 +55,14 @@ public class NPC : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        // Player is in range, trigger the dialogue
                         dialogue.StartDialogue(npcDialogues);
-                        audio.Stop();
-                        // Set the appropriate NPC active flag
+                        audioNPC.Stop();
                         SetActiveFlag();
-
-                        interactionTriggered = true; // Set to true to avoid repeating the interaction
+                        interactionTriggered = true; 
                     }
-                    return; // exit the loop if player is found
+                    return; 
                 }
-            }
-
-            // If player is not found in the loop, set inRange to false
+            } 
             inRange = false;
         }
     }
@@ -92,15 +86,11 @@ public class NPC : MonoBehaviour
         }
     }
 
-    // Add this method to reset interactionTriggered
     public void ResetInteraction()
     {
         interactionTriggered = false;
     }
 
-// Add this method to reset interactionTriggered
-
-    // Draw the interaction radius gizmo for better visualization in the Scene view
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

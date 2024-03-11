@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnemyKnife : Enemy
 {
+    [Header("Enemy Knife Settings")]
+    public float attackInterval = 2f; 
 
-    public float attackInterval = 2f; // Time interval between knife attacks
     private float knifeRange = 3;
-
+    private int knifeDamage = 5;
     private bool isAttacking = false;
 
     public override void Start()
     {
         base.Start();
-       
     }
 
     public override void Update()
@@ -21,7 +21,6 @@ public class EnemyKnife : Enemy
         base.Update();
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
         if (distanceToPlayer <= knifeRange && !isAttacking)
         {
             StartCoroutine(AttackRoutine());
@@ -40,7 +39,6 @@ public class EnemyKnife : Enemy
     public override IEnumerator AttackRoutine()
     {
         isAttacking = true;
-
         while (isAttacking)
         {
             yield return new WaitForSeconds(attackInterval);
@@ -50,10 +48,7 @@ public class EnemyKnife : Enemy
 
     private void KnifeAttack()
     {
-        // Implement your knife attack logic here
-        Debug.Log("Knife attack!");
         enemyAnimator.SetBool("Knife", true);
-        player.GetComponent<Player>().TakeDamage(damage);
-        // You can add code here to deal damage to the player or trigger any other actions
+        player.GetComponent<Player>().TakeDamage(knifeDamage);
     }
 }

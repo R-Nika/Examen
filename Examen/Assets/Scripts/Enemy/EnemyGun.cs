@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyGun : Enemy
 {
-    public GameObject projectilePrefab;
-    public Transform projectileSpawn;
+    [Header("Enemy Gun Settings")]
     public float shootingRange = 10f;
+    public Transform projectileSpawn;
+    public GameObject projectilePrefab;
 
     private bool isShooting = false;
 
@@ -31,7 +32,6 @@ public class EnemyGun : Enemy
     public override IEnumerator AttackRoutine()
     {
         isShooting = true;
-
         while (isShooting)
         {
             yield return new WaitForSeconds(1f);
@@ -42,7 +42,8 @@ public class EnemyGun : Enemy
 
     void ShootProjectile()
     {
-        Debug.Log("Shooting projectile");
+        enemyAnimator.SetBool("RevolverShoot", true);
+
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
         Vector3 directionToPlayer = (player.position - projectileSpawn.position).normalized;

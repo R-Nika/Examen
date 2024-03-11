@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
- 
+    [Header("First Person Camera Settings")]
+    public bool mouseLook = true;
+
     private float mouseSensitivity = 60f;
     private float rotationSpeed = 5f;
     private float verticalRotationLimit = 80f;
     private float verticalRotation = 0f;
-
-    private Transform playerTransform; // NEW VARIABLE
-
+    private Transform playerTransform; 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerTransform = transform.parent; // Assuming camera is a child of the player
+        playerTransform = transform.parent;
     }
 
     void FixedUpdate()
     {
-        HandleMouseLook();
+        if (mouseLook)
+        {
+            HandleMouseLook();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     private void HandleMouseLook()
