@@ -112,9 +112,37 @@
     "m_GroupDatas": [
         {
             "m_Id": "9f642649ed0d492780aaad93150f000b"
+        },
+        {
+            "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
         }
     ],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "e1f618a5138e420c81160ecc7bcc0b70"
+        },
+        {
+            "m_Id": "f84735794a6f4fb79b2bbd871cd5772f"
+        },
+        {
+            "m_Id": "977dc36c7b334468857d982516b37182"
+        },
+        {
+            "m_Id": "6caf6916452d4c1e80359129381746fd"
+        },
+        {
+            "m_Id": "834fbad2e6da4fc386bfb6827cacaea6"
+        },
+        {
+            "m_Id": "7bf21765f9f449109f2a99213358a64c"
+        },
+        {
+            "m_Id": "2b9a95165a284e8d830118c491843270"
+        },
+        {
+            "m_Id": "a4d972c0075e42df944c42c23fb2becb"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -603,10 +631,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -863.0,
-            "y": -348.0000305175781,
-            "width": 208.0,
-            "height": 302.0
+            "x": -552.0,
+            "y": -336.00006103515627,
+            "width": 207.99996948242188,
+            "height": 302.0000305175781
         }
     },
     "m_Slots": [
@@ -1007,6 +1035,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "2b9a95165a284e8d830118c491843270",
+    "m_Title": "World + Wind",
+    "m_Content": "Hier add ik de postion van de world en de wind function om te zorgen dat hij de wind pakt in verband met de world position van de boom zodat hij altijd de juiste kan op beweegt.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -825.0,
+        "y": -295.0,
+        "width": 200.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "33faf93718024896876f37cb671895d4",
     "m_Id": 2,
@@ -1159,17 +1207,17 @@
     "m_Type": "UnityEditor.ShaderGraph.CombineNode",
     "m_ObjectId": "3e4de5087d284c228714671fd30e468d",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
     },
     "m_Name": "Combine",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1124.9998779296875,
-            "y": -179.00003051757813,
+            "x": -1093.0001220703125,
+            "y": -0.00004363059997558594,
             "width": 208.0,
-            "height": 350.0
+            "height": 349.9999694824219
         }
     },
     "m_Slots": [
@@ -1219,8 +1267,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1124.9998779296875,
-            "y": -538.0,
+            "x": -1059.0,
+            "y": -439.9999694824219,
             "width": 208.0,
             "height": 315.0
         }
@@ -1459,10 +1507,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3226.000244140625,
-            "y": -475.0000915527344,
+            "x": -3308.0,
+            "y": -483.0000305175781,
             "width": 120.0,
-            "height": 148.99990844726563
+            "height": 149.0
         }
     },
     "m_Slots": [
@@ -1603,6 +1651,26 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "6caf6916452d4c1e80359129381746fd",
+    "m_Title": "Divide",
+    "m_Content": "Hier Divide ik de Bend strength met 100 omdat de bend strength anders te sterk is en zodat ik niet een heel groot nummer hoef toe te voegen bij de bend strength in de inspector",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -3249.0,
+        "y": -77.0,
+        "width": 200.0,
+        "height": 118.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
@@ -1836,6 +1904,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "7bf21765f9f449109f2a99213358a64c",
+    "m_Title": "Wind direction",
+    "m_Content": "met deze wind direction function pak ik een split node die de X as pakt en de Y gaat naar de Z as word over gezet zodat de bladeren heen en weer bewegen en niet omhoog.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -1308.0,
+        "y": 188.0,
+        "width": 200.0,
+        "height": 132.13043212890626
+    },
+    "m_Group": {
+        "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "7c860abfb60b43e8a7a5964a007ea5db",
     "m_Id": 7,
@@ -1878,17 +1966,17 @@
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "7f84b6018e044029a14caa5dac1bd914",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
     },
     "m_Name": "Property",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1795.0001220703125,
-            "y": -24.000003814697267,
-            "width": 124.0,
-            "height": 34.00000762939453
+            "x": -1756.0,
+            "y": 165.99996948242188,
+            "width": 123.9998779296875,
+            "height": 33.99992370605469
         }
     },
     "m_Slots": [
@@ -1930,6 +2018,26 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "834fbad2e6da4fc386bfb6827cacaea6",
+    "m_Title": "Position",
+    "m_Content": "Hier heb ik een position node toegevoegd van het object. ik heb het in een split node gedaan zodat ik de Y as van het object kan pakken.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -3357.0,
+        "y": -596.0,
+        "width": 200.0,
+        "height": 100.0
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 
@@ -2217,8 +2325,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3724.000244140625,
-            "y": -82.0,
+            "x": -3723.0,
+            "y": -130.00001525878907,
             "width": 124.0,
             "height": 173.00001525878907
         }
@@ -2247,6 +2355,26 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "977dc36c7b334468857d982516b37182",
+    "m_Title": "Bending Strength",
+    "m_Content": "Hier multiply ik de tijd met de bend strength zodat de bending beter is aan te passen in de inspector.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -3596.0,
+        "y": -24.0,
+        "width": 200.0,
+        "height": 49.0
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 
@@ -2432,6 +2560,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "a4d972c0075e42df944c42c23fb2becb",
+    "m_Title": "Transform",
+    "m_Content": "Hier heb ik een transform node gezet omdat de world positon omgezet moet worden naar object position anders kan deze node niet worden aangesloten aan de vertex postion\nomdat dit in object space is",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -285.0,
+        "y": -453.0,
+        "width": 221.0,
+        "height": 120.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "a535fc4819454c55a1a934bed56d4159",
     "m_Id": 0,
@@ -2597,6 +2745,17 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.GroupData",
+    "m_ObjectId": "b19e0cc1f856449db04611fcb4a58ebe",
+    "m_Title": "Wind direction",
+    "m_Position": {
+        "x": 10.0,
+        "y": 10.0
+    }
 }
 
 {
@@ -2982,17 +3141,17 @@
     "m_Type": "UnityEditor.ShaderGraph.SplitNode",
     "m_ObjectId": "cef1e5696acd4898bf98a5d5f9c939dd",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
     },
     "m_Name": "Split",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1304.0,
-            "y": -173.0,
-            "width": 119.0001220703125,
-            "height": 148.99998474121095
+            "x": -1272.0001220703125,
+            "y": 5.999938488006592,
+            "width": 119.0,
+            "height": 149.00001525878907
         }
     },
     "m_Slots": [
@@ -3126,6 +3285,26 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "e1f618a5138e420c81160ecc7bcc0b70",
+    "m_Title": "Texture",
+    "m_Content": "Dit is de texture die word geburikt voor de bladeren van de boom.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -545.0,
+        "y": 461.0,
+        "width": 200.0,
+        "height": -2.733612060546875
+    },
+    "m_Group": {
+        "m_Id": ""
     }
 }
 
@@ -3313,10 +3492,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -600.0000610351563,
-            "y": -349.0000305175781,
-            "width": 213.00006103515626,
-            "height": 340.9999694824219
+            "x": -289.0000915527344,
+            "y": -337.0,
+            "width": 213.00001525878907,
+            "height": 341.0
         }
     },
     "m_Slots": [
@@ -3377,9 +3556,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3256.000244140625,
-            "y": -221.00001525878907,
-            "width": 126.000244140625,
+            "x": -3289.0,
+            "y": -200.00001525878907,
+            "width": 126.0,
             "height": 118.0
         }
     },
@@ -3527,20 +3706,40 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "f84735794a6f4fb79b2bbd871cd5772f",
+    "m_Title": "Bending Function",
+    "m_Content": "Deze functie zorgt ervoor dat de bending in een ciruele vorm werkt.\nHierdoor bend alles wat verder van het midden is meer dan het middan van de model.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -2532.0,
+        "y": -632.0,
+        "width": 200.0,
+        "height": 54.20001220703125
+    },
+    "m_Group": {
+        "m_Id": "9f642649ed0d492780aaad93150f000b"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "f9b93a97e3a4471f94e12e23eae29c54",
     "m_Group": {
-        "m_Id": ""
+        "m_Id": "b19e0cc1f856449db04611fcb4a58ebe"
     },
     "m_Name": "Multiply",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1560.0,
-            "y": -174.99998474121095,
-            "width": 208.0,
-            "height": 301.9999694824219
+            "x": -1528.0001220703125,
+            "y": 3.999971389770508,
+            "width": 208.0001220703125,
+            "height": 302.0000305175781
         }
     },
     "m_Slots": [
