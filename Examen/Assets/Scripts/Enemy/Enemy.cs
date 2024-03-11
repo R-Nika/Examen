@@ -15,12 +15,16 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public Slider healthSlider;
 
+    public Animator enemyAnimator;
+    public bool isWalking = false;
+
 
     // Start is called before the first frame update
     public virtual void Start()
     {
        // player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        enemyAnimator = GetComponent<Animator>();
 
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
@@ -64,24 +68,32 @@ public class Enemy : MonoBehaviour
         {
             if (distanceToPlayer <= stoppingDistance)
             {
-               
                 navMeshAgent.ResetPath();
-              
+                // Not walking, set the animation bool to false
+                isWalking = false;
+                enemyAnimator.SetBool("Walking", false);
             }
             else
             {
-               
                 Vector3 directionToPlayer = player.position - transform.position;
                 Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance;
                 navMeshAgent.SetDestination(newPosition);
+
+                // Walking, set the animation bool to true
+                isWalking = true;
+                enemyAnimator.SetBool("Walking", true);
             }
         }
         else
         {
-            
             navMeshAgent.ResetPath();
-           
+            // Not walking, set the animation bool to false
+            isWalking = false;
+            enemyAnimator.SetBool("Walking", false);
         }
+
+        // Update the animation bool in the Animator
+      
     }
 
     public virtual IEnumerator AttackRoutine()

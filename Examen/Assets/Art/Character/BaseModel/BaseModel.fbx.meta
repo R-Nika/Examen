@@ -124,7 +124,7 @@ ModelImporter:
       takeName: rig.002|GunHolding
       internalID: -4967841488785483248
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -298,7 +298,7 @@ ModelImporter:
       takeName: rig.002|Thompson
       internalID: -172173233095036529
       firstFrame: 0
-      lastFrame: 0
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

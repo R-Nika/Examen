@@ -10,6 +10,12 @@ public class EnemyKnife : Enemy
 
     private bool isAttacking = false;
 
+    public override void Start()
+    {
+        base.Start();
+       
+    }
+
     public override void Update()
     {
         base.Update();
@@ -24,6 +30,10 @@ public class EnemyKnife : Enemy
         {
             StopCoroutine(AttackRoutine());
             isAttacking = false;
+        }
+        else
+        {
+            enemyAnimator.SetBool("Knife", false);
         }
     }
 
@@ -42,6 +52,7 @@ public class EnemyKnife : Enemy
     {
         // Implement your knife attack logic here
         Debug.Log("Knife attack!");
+        enemyAnimator.SetBool("Knife", true);
         player.GetComponent<Player>().TakeDamage(damage);
         // You can add code here to deal damage to the player or trigger any other actions
     }

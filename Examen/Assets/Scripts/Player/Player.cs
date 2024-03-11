@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     [Header("Weapon & Currency Settings")]
     public int currency;
-    public GameObject weaponA;
-    public GameObject weaponB;
+    public GameObject weaponThompson;
+    public GameObject weaponRevolver;
     public GameObject crowbar;
     [SerializeField] private GameObject currentWeapon;
 
@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public TMP_Text healthText;
     public TMP_Text arrestText;
     public TMP_Text currencyText;
+
+    public GameObject ammoThompsonText;
+    public GameObject ammoRevolverText;
 
     [Header("Player Settings")]
     [SerializeField] private int health = 100;
@@ -33,6 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool canJump = true; 
     [SerializeField] private bool isRunning = false;
+
+    public Camera mainCamera;
 
     private int jumpcount = 0;  // Move jumpcount outside the Move method
     private int maxJumpcount = 2;
@@ -57,10 +62,13 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
 
-        currentWeapon = weaponA;
+        ammoThompsonText.SetActive( false);
+        ammoRevolverText.SetActive(false);
 
-        weaponA.SetActive(false);
-        weaponB.SetActive(false);
+        currentWeapon = weaponThompson;
+
+        weaponThompson.SetActive(false);
+        weaponRevolver.SetActive(false);
         crowbar.SetActive(false);
         arrestText.enabled = false;
 
@@ -81,6 +89,7 @@ public class Player : MonoBehaviour
         Debug.Log(health);
         currencyText.text = currency.ToString();
 
+        
         Move();
         Run();
         Crouch();
@@ -93,12 +102,13 @@ public class Player : MonoBehaviour
             ArrestClosestEnemy();
             Interact();
         }
-
-
         if (Input.GetButtonDown("Jump"))
         {
             StartCoroutine(PlayJumpAnimation());
         }
+
+
+
     }
 
     IEnumerator PlayJumpAnimation()
@@ -122,19 +132,41 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentWeapon.SetActive(false);
-            currentWeapon = weaponA;
+            currentWeapon = weaponThompson;
+
+            ammoThompsonText.SetActive(true);
+            ammoRevolverText.SetActive(false);
+            
+            playerAnimator.SetBool("GunHolding", false);
+            playerAnimator.SetBool("ThompsonHolding", true);
+
             currentWeapon.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentWeapon.SetActive(false);
-            currentWeapon = weaponB;
+            ammoThompsonText.SetActive(false);
+            ammoRevolverText.SetActive(true);
+          
+            playerAnimator.SetBool("GunHolding", true);
+            playerAnimator.SetBool("ThompsonHolding", false);
+
+            currentWeapon = weaponRevolver;
+
             currentWeapon.SetActive(true);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             currentWeapon.SetActive(false);
+
+            playerAnimator.SetBool("GunHolding", false);
+            playerAnimator.SetBool("ThompsonHolding", false);
+
             currentWeapon = crowbar;
+
+            ammoThompsonText.SetActive(false);
+            ammoRevolverText.SetActive(false);
+
             currentWeapon.SetActive(true);
         }
     }
@@ -249,8 +281,8 @@ public class Player : MonoBehaviour
                 isCrouching = true;
                 moveSpeed = crouchSpeed;
 
-                Vector3 newCameraPosition = new Vector3(0f, 1.6f, 0.1f); // Camera height when crouching // hardcoded
-                transform.GetChild(0).localPosition = newCameraPosition;
+                Vector3 newCameraPosition = new Vector3(0f, 1.8f, 0.1f); // Camera height when crouching // hardcoded
+                mainCamera.transform.position = newCameraPosition;
             }
         }
         else if (isCrouching) // Check if currently crouching
@@ -258,8 +290,8 @@ public class Player : MonoBehaviour
             isCrouching = false;
             moveSpeed = isRunning ? runSpeed : walkSpeed;
 
-            Vector3 originalCameraPosition = new Vector3(0f, 1.8f, 0.1f); // NOT HARDCODED
-            transform.GetChild(0).localPosition = originalCameraPosition;
+            Vector3 originalCameraPosition = new Vector3(0f, 1.6f, 0.1f); // NOT HARDCODED
+            mainCamera.transform.position = originalCameraPosition;
         }
 
     }
@@ -318,6 +350,52 @@ public class Player : MonoBehaviour
         {
             playerAnimator.SetBool("Crouching", false);
         }
+
+
+
+        
+        if (weaponThompson.GetComponent<Weapon>().reload)
+        {
+            playerAnimator.SetBool("ThompsonReload", true);
+            Debug.Log("Anim Thompson Reload");
+        }
+        else
+        {
+            playerAnimator.SetBool("ThompsonReload", false);
+        }
+
+        if (weaponThompson.GetComponent<Weapon>().shoot)
+        {
+            playerAnimator.SetBool("ThompsonShoot", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("ThompsonShoot", false);
+
+        }
+
+
+
+        if (weaponRevolver.GetComponent<Weapon>().reload)
+        {
+            playerAnimator.SetBool("GunReload", true);
+            Debug.Log("Anim Revolver Reload");
+        }
+        else
+        {
+            playerAnimator.SetBool("GunReload", false);
+        }
+
+        if (weaponRevolver.GetComponent<Weapon>().shoot)
+        {
+            playerAnimator.SetBool("GunShoot", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("GunShoot", false);
+
+        }
+
     }
 
     #region Interactions
