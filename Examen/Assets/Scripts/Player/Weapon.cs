@@ -47,6 +47,9 @@ public class Weapon : MonoBehaviour
         shoot = true;
         Debug.Log(shoot);
         Shoot();
+
+        shoot_audio.Play();
+
         yield return new WaitForSeconds(0.2f);
         shoot = false;
     }
@@ -55,7 +58,8 @@ public class Weapon : MonoBehaviour
     {
 
         reload = true;
-      
+
+        reload_audio.Play();
         ammoCount = maxAmmo;
         yield return new WaitForSeconds(0.2f);
         reload = false;

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EnemyBoss : Enemy
 {
-    public GameObject minionType1Prefab;
-    public GameObject minionType2Prefab;
-    public GameObject minionType3Prefab;
+    public GameObject[] minion;
 
     private bool summoningMinions = false;
     public float summonInterval = 3f; // Time interval between summoning minions
@@ -42,12 +40,12 @@ public class EnemyBoss : Enemy
 
     public void SummonMinions()
     {
-        int numberOfMinions = 3;
-        List<GameObject> minionPrefabs = new List<GameObject> { minionType1Prefab, minionType2Prefab, minionType3Prefab };
+     
+        
 
-        for (int i = 0; i < numberOfMinions; i++)
+        for (int i = 0; i < minion.Length; i++)
         {
-            GameObject selectedMinionPrefab = minionPrefabs[Random.Range(0, minionPrefabs.Count)];
+            GameObject selectedMinionPrefab = minion[Random.Range(0, minion.Length)];
 
             Vector3 randomOffset = Random.onUnitSphere * 5f;
             Vector3 minionPosition = transform.position + randomOffset;

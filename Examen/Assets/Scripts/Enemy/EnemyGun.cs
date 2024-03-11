@@ -18,11 +18,13 @@ public class EnemyGun : Enemy
         if (distanceToPlayer <= shootingRange && !isShooting)
         {
             StartCoroutine(AttackRoutine());
+            enemyAnimator.SetBool("GunWalk", true);
         }
         else if (distanceToPlayer > shootingRange && isShooting)
         {
             StopCoroutine(AttackRoutine());
             isShooting = false;
+            enemyAnimator.SetBool("GunWalk", false);
         }
     }
 
@@ -34,6 +36,7 @@ public class EnemyGun : Enemy
         {
             yield return new WaitForSeconds(1f);
             ShootProjectile();
+            
         }
     }
 
