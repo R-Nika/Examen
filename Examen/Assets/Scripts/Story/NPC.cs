@@ -18,6 +18,8 @@ public class NPC : MonoBehaviour
     [HideInInspector] public bool phoneActive = false;
     [HideInInspector] public bool policeActive = false;
 
+    public AudioSource audio;
+
     private bool interactionTriggered = false;
 
     private void Start()
@@ -56,7 +58,7 @@ public class NPC : MonoBehaviour
                     {
                         // Player is in range, trigger the dialogue
                         dialogue.StartDialogue(npcDialogues);
-
+                        audio.Stop();
                         // Set the appropriate NPC active flag
                         SetActiveFlag();
 
