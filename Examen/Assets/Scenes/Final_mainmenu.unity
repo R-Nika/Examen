@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0903879fa36a24145a5377dccf3c0445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSceneIndex: 1
+  mainSceneIndex: 4
   fadeAnim: {fileID: 1807098244}
 --- !u!224 &1831766505 stripped
 RectTransform:

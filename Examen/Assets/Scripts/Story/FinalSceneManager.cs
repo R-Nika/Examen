@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class TeleportCafe : MonoBehaviour
+public class FinalSceneManager : MonoBehaviour
 {
-    [SerializeField] Transform teleportPos;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
-            other.transform.position = teleportPos.position;
+            SceneManager.LoadScene(6);
         }
     }
-
 }

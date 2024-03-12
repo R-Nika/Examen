@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] int mainSceneIndex = 1;
     [SerializeField] Animator fadeAnim;
     public void QuitGame()
     {
@@ -25,7 +24,7 @@ public class MainMenu : MonoBehaviour
 
     void LoadMainScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(4);
     }
 
     public void ReferenceLoadMainMenu()

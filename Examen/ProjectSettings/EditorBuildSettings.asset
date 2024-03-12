@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Final_CafeInside.unity
     guid: b7c95d8d38fd10a4c8de20a3a0a456d5
+  - enabled: 1
+    path: Assets/Scenes/Final_Verlatengebouwinside.unity
+    guid: 63d49447e9eb0ec438f5e99e9884b1f7
   m_configObjects: {}
