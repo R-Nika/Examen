@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7401824896903752572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 138.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.43340158
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -254.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0000004768371
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998209607622597385, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902984858894771973, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}
+      propertyPath: m_Name
+      value: Appartment type1 (19) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35663e58d265df64fb1f4d3f99080107, type: 3}

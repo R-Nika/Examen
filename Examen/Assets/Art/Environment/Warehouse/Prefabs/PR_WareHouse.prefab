@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4095616224949996246}
   - component: {fileID: 2311757384164433212}
   - component: {fileID: 3941199123252507010}
+  - component: {fileID: 4821040996084156886}
   m_Layer: 0
   m_Name: TopBrick (1)
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4821040996084156886
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896091257865612525}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.599998, y: 4.4339547, z: 13.464198}
+  m_Center: {x: 12.851887, y: 4.716977, z: 0}
 --- !u!1 &2792900723643718229
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +116,7 @@ GameObject:
   - component: {fileID: 274928390204802782}
   - component: {fileID: 4118310986029465286}
   - component: {fileID: 2478730607066214398}
+  - component: {fileID: 7629568197911736457}
   m_Layer: 0
   m_Name: TopBrick (3)
   m_TagString: Untagged
@@ -166,6 +189,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7629568197911736457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792900723643718229}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.599998, y: 4.4339547, z: 13.464198}
+  m_Center: {x: 12.851887, y: 4.716977, z: 0}
 --- !u!1 &3066480201728955183
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +221,7 @@ GameObject:
   - component: {fileID: 2866417462834720229}
   - component: {fileID: 211889593903048940}
   - component: {fileID: 1411521054441324345}
+  - component: {fileID: 3773160357229711483}
   m_Layer: 0
   m_Name: TopBrick (2)
   m_TagString: Untagged
@@ -249,6 +294,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3773160357229711483
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066480201728955183}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.599998, y: 4.4339547, z: 13.464198}
+  m_Center: {x: 12.851887, y: 4.716977, z: 0}
 --- !u!1 &3478653579306490367
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +326,7 @@ GameObject:
   - component: {fileID: 8683793490629519066}
   - component: {fileID: 4780060345926712731}
   - component: {fileID: 7766156964441530760}
+  - component: {fileID: 108272975422153073}
   m_Layer: 0
   m_Name: UnderBrick
   m_TagString: Untagged
@@ -332,6 +399,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &108272975422153073
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478653579306490367}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.599998, y: 4, z: 13.464198}
+  m_Center: {x: 12.851887, y: 0.50000006, z: 0}
 --- !u!1 &5563473802756253809
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +467,7 @@ GameObject:
   - component: {fileID: 1833978812025886278}
   - component: {fileID: 1939888753752378974}
   - component: {fileID: 2452679741043641947}
+  - component: {fileID: 7632969126064403751}
   m_Layer: 0
   m_Name: TopBrick
   m_TagString: Untagged
@@ -451,3 +540,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7632969126064403751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769770807660161714}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.599998, y: 4.4339547, z: 13.464198}
+  m_Center: {x: 12.851887, y: 4.716977, z: 0}
