@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 81754649}
   - component: {fileID: 81754648}
+  - component: {fileID: 81754650}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -171,6 +172,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &81754650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81754647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f6d9ee78a3864aa84cbb437cabb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSystem: {fileID: 81754648}
+  fadeAnimator: {fileID: 433214983}
 --- !u!114 &112083098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1762801151825241292, guid: 4ac99a7f2d9f63c4e88ee0fe954954dc, type: 3}
@@ -318,6 +333,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7263333417139095118, guid: c1be5bfe5457e4641a08a6ac32a4b5b7, type: 3}
   m_PrefabInstance: {fileID: 356563939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &433214983 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 739683671496120732, guid: 4ac99a7f2d9f63c4e88ee0fe954954dc, type: 3}
+  m_PrefabInstance: {fileID: 1654384508}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &560071770
 PrefabInstance:
