@@ -179,7 +179,7 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died!");
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene(2);
     }
     #endregion
 

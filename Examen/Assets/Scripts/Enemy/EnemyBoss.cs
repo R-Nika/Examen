@@ -115,6 +115,6 @@ public class EnemyBoss : Enemy
     public override void Die()
     {
         base.Die();
-        SceneManager.LoadScene("Finished");
+        SceneManager.LoadScene(3);
     }
 }
