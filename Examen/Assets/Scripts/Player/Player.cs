@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
         AnimationManager();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButtonDown("Interaction"))
         {
             ArrestClosestEnemy();
             Interact();
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
     public void SelectItem()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButtonDown("Select1"))
         {
             currentWeapon.SetActive(false);
            
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
 
             currentWeapon.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetButtonDown("Select2"))
         {
             currentWeapon.SetActive(false);
 
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
 
             currentWeapon.SetActive(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetButtonDown("Select3"))
         {
             currentWeapon.SetActive(false);
 
@@ -240,7 +240,7 @@ public class Player : MonoBehaviour
 
     private void Run()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
+        if (Input.GetButtonDown("Left Shift") && !isCrouching)
         {
             isRunning = true;
             moveSpeed = runSpeed;
@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
 
     private void Crouch()
     {
-        if (Input.GetKey(KeyCode.LeftControl) && !isRunning)
+        if (Input.GetButtonDown("Left Control") && !isRunning)
         {
             if (!isCrouching)
             {

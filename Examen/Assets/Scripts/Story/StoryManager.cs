@@ -6,6 +6,7 @@ using System.Linq;
 
 public class StoryManager : MonoBehaviour
 {
+    [Header("Story Settings")]
     public GameObject[] npcs;
     public DialogueSystem dialogue;
 

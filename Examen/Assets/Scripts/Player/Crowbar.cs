@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Crowbar : MonoBehaviour
 {
+    [Header("Crowbar Settings")]
     private int range = 3;
 
     void Update()

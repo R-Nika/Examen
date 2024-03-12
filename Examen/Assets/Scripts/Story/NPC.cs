@@ -50,10 +50,9 @@ public class NPC : MonoBehaviour
             {
                 if (collider.CompareTag("Player"))
                 {
-                    Debug.Log("Player is in range of an NPC");
                     inRange = true;
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetButtonDown("Interact"))
                     {
                         dialogue.StartDialogue(npcDialogues);
                         audioNPC.Stop();

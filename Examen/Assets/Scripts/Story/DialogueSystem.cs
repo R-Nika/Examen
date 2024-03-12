@@ -44,12 +44,12 @@ public class DialogueSystem : MonoBehaviour
     {
         if (isDialoguing)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !eKeyPressedLastFrame)
+            if (Input.GetButtonDown("Interact") && !eKeyPressedLastFrame)
             {
                 ContinueDialogue();
             }
         }
-        eKeyPressedLastFrame = Input.GetKey(KeyCode.E);
+        eKeyPressedLastFrame = Input.GetButtonDown("Interact");
     }
 
     void ContinueDialogue()

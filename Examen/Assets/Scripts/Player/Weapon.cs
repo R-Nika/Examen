@@ -21,13 +21,11 @@ public class Weapon : MonoBehaviour
     public AudioSource shoot_audio;
     public AudioSource reload_audio;
 
-
-    // Update is called once per frame
     void Update()
     {
         ammocountText.text = ammoCount.ToString() + "/" + maxAmmo.ToString();
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Reload"))
         {
             if (!reload)
             {
@@ -47,24 +45,18 @@ public class Weapon : MonoBehaviour
         shoot = true;
         Debug.Log(shoot);
         Shoot();
-
         shoot_audio.Play();
-
         yield return new WaitForSeconds(0.2f);
         shoot = false;
     }
 
     public IEnumerator Reload()
     {
-
         reload = true;
-
         reload_audio.Play();
         ammoCount = maxAmmo;
         yield return new WaitForSeconds(0.2f);
         reload = false;
-        Debug.Log(reload);
-
     }
    
     public void Shoot()
@@ -82,5 +74,4 @@ public class Weapon : MonoBehaviour
             Debug.LogError("Projectile is missing Rigidbody component!");
         }
     }
-
 }
