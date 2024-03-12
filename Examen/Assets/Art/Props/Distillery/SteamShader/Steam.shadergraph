@@ -126,7 +126,17 @@
             "m_Id": "efdb2292fe2d40218c314cf5d92db508"
         }
     ],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "ec94f0b2613a454b9caf9261ce4fd180"
+        },
+        {
+            "m_Id": "8fd749fc21074fd69d676a521d4f5899"
+        },
+        {
+            "m_Id": "d9fda79bce6c43a4a91ede1dadbac323"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -2194,6 +2204,26 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "8fd749fc21074fd69d676a521d4f5899",
+    "m_Title": "Noise and grain",
+    "m_Content": "Combining noise and gradient noice to make a randomized scrolling pattern\n",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -1503.2000732421875,
+        "y": 952.7999877929688,
+        "width": 200.0,
+        "height": 108.00006103515625
+    },
+    "m_Group": {
+        "m_Id": "088b7219130d463ebfd77221da890c84"
+    }
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
     "m_ObjectId": "8fe2e5874fc948f98f833e8460056b14",
@@ -2959,6 +2989,26 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "d9fda79bce6c43a4a91ede1dadbac323",
+    "m_Title": "Finalizing",
+    "m_Content": "Combining the previous nodes with a texture sprite to create smoke and combining that with the Alpha to control brightness\n",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -896.0,
+        "y": 86.4000015258789,
+        "width": 200.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": "efdb2292fe2d40218c314cf5d92db508"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "dbf39edcfacb4ab3ad4668b5fd94d320",
     "m_Id": 0,
@@ -3142,6 +3192,26 @@
     "m_Value": 1.0,
     "m_DefaultValue": 1.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "ec94f0b2613a454b9caf9261ce4fd180",
+    "m_Title": "Scrolling texture",
+    "m_Content": "Creating a scrolling texture by using a random seed ",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -2876.0,
+        "y": -19.200000762939454,
+        "width": 200.0,
+        "height": 159.1999969482422
+    },
+    "m_Group": {
+        "m_Id": "b241d58953744fa1a94b90d128ed6cec"
+    }
 }
 
 {
