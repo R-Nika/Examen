@@ -260,71 +260,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1001 &1847523854
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.0849909
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.461426
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.6548314
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ddc968703f32a9d4dba24e205aadfb66, type: 2}
-    - target: {fileID: -7511558181221131132, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4b4532d30ba033043a0f038f048cf976, type: 2}
-    - target: {fileID: 919132149155446097, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
-      propertyPath: m_Name
-      value: Karaf met drank
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1341a7356c924434bb78aa22b2f29aeb, type: 3}
 --- !u!1001 &1850466509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1534,6 +1469,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 506cb0547ef6d1b428b209a1cf7f88a2, type: 3}
+--- !u!1001 &8085830237716723160
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.0849909
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.461426
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.6548314
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 552418217549536164, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 928099816705016094, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
+      propertyPath: m_Name
+      value: Karaf met drank
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8cd9f67ac8acbdd42a51c54d5235aba4, type: 3}
 --- !u!1001 &8260879679172890890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2023,4 +2015,4 @@ SceneRoots:
   - {fileID: 8752052369320392489}
   - {fileID: 140289581576698849}
   - {fileID: 4103257669300192710}
-  - {fileID: 1847523854}
+  - {fileID: 8085830237716723160}
