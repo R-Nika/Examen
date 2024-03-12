@@ -11,17 +11,10 @@ public class NPC : MonoBehaviour
     public TMP_Text pressE;
     public DialogueSystem dialogue;
 
-    private bool interactionTriggered = false;
     private bool inRange = false;
 
-    [Header("NPC Settings")]
-    [HideInInspector] public bool farmerActive = false;
-    [HideInInspector] public bool cafeActive = false;
-    [HideInInspector] public bool phoneActive = false;
-    [HideInInspector] public bool policeActive = false;
-
-    [Header("Audio Settings")]
-    public AudioSource audioNPC;
+    //[Header("Audio Settings")]
+    // public AudioSource audioNPC;
 
     private void Start()
     {
@@ -31,7 +24,7 @@ public class NPC : MonoBehaviour
     private void Update()
     {
         CheckPlayerInRange();
-        if (inRange)
+        if (inRange /*&& !dialogue.isDialoguing*/) // Check if dialogue is not active to avoid overlapping dialogues
         {
             pressE.enabled = true;
         }
@@ -43,53 +36,38 @@ public class NPC : MonoBehaviour
 
     private void CheckPlayerInRange()
     {
-        if (!interactionTriggered)
-        {          
-            Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
-            foreach (Collider collider in colliders)
-            {
-                if (collider.CompareTag("Player"))
-                {
-                    inRange = true;
-
-                    if (Input.GetButtonDown("Interact"))
-                    {
-                        dialogue.StartDialogue(npcDialogues);
-                        audioNPC.Stop();
-                        SetActiveFlag();
-                        interactionTriggered = true; 
-                    }
-                    return; 
-                }
-            } 
-            inRange = false;
-        }
-    }
-
-    private void SetActiveFlag()
-    {
-        switch (gameObject.tag)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+        foreach (Collider collider in colliders)
         {
-            case "Phone":
-                phoneActive = true;
-                break;
-            case "Farmer":
-                farmerActive = true;
-                break;
-            case "Cafe":
-                cafeActive = true;
-                
-                break;
-            case "Police":
-                policeActive = true;
-                break;
+            if (collider.CompareTag("Player"))
+            {
+                inRange = true;
+
+                if (Input.GetButtonDown("Interact"))
+                {
+                    StartInteraction();
+                }
+                if (dialogue.dialogueContinue && dialogue.isDialoguing)
+                {
+                    dialogue.ContinueDialogue();
+                }
+                return;
+            }
         }
+        inRange = false;
     }
 
-    public void ResetInteraction()
+    private void StartInteraction()
     {
-        interactionTriggered = false;
+        dialogue.StartDialogue(npcDialogues);
+
+        //audioNPC.Stop();
     }
+
+    //public void ResetInteraction()
+    //{
+    //    inRange = false; // Reset inRange flag to allow interaction again
+    //}
 
     private void OnDrawGizmosSelected()
     {

@@ -9,6 +9,7 @@ public class DialogueSystem : MonoBehaviour
     [Header("Dialogue Settings")]
     public bool dialogueFinished = false;
     public bool isDialoguing = false;
+    public bool dialogueContinue = false;
     public TMP_Text dialogueText;
     public GameObject dialoguePanel;
 
@@ -25,10 +26,10 @@ public class DialogueSystem : MonoBehaviour
     {
         dialoguePanel.SetActive(true);
         currentDialogues = dialogues;
-        currentDialogueIndex = 0; 
+        currentDialogueIndex = 0;
         dialogueFinished = false;
         isDialoguing = true;
-        eKeyPressedLastFrame = false; 
+        //eKeyPressedLastFrame = false;
 
         if (currentDialogues != null && currentDialogues.Length > 0)
         {
@@ -44,27 +45,29 @@ public class DialogueSystem : MonoBehaviour
     {
         if (isDialoguing)
         {
-            if (Input.GetButtonDown("Interact") && !eKeyPressedLastFrame)
+            if (Input.GetButtonDown("Interact")/* && /*!eKeyPressedLastFrame*/)
             {
-                ContinueDialogue();
+                dialogueContinue = true;
+               // ContinueDialogue();
             }
         }
-        eKeyPressedLastFrame = Input.GetButtonDown("Interact");
+        // eKeyPressedLastFrame = Input.GetButtonDown("Interact");
     }
 
-    void ContinueDialogue()
+    public void ContinueDialogue()
     {
         if (currentDialogueIndex < currentDialogues.Length)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
-            currentDialogueIndex++; 
+            currentDialogueIndex++;
         }
         else
-        {           
+        {
             isDialoguing = false;
             dialoguePanel.SetActive(false);
             dialogueFinished = true;
             currentDialogueIndex = 0;
+            dialogueContinue = false;
         }
     }
 }

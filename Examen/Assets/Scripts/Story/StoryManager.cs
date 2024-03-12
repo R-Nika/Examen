@@ -22,7 +22,7 @@ public class StoryManager : MonoBehaviour
     {
         if ((dialogue.isDialoguing == false || dialogue.dialogueFinished) && Input.GetKeyDown(KeyCode.E))
         {
-            npcs[currentNPCIndex].GetComponent<NPC>().ResetInteraction();
+            //npcs[currentNPCIndex].GetComponent<NPC>().ResetInteraction();
             currentNPCIndex++;
 
             if (currentNPCIndex < npcs.Length)
