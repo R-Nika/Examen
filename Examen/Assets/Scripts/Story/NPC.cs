@@ -79,6 +79,7 @@ public class NPC : MonoBehaviour
                 break;
             case "Cafe":
                 cafeActive = true;
+                
                 break;
             case "Police":
                 policeActive = true;

@@ -6,54 +6,49 @@ using System.Linq;
 
 public class StoryManager : MonoBehaviour
 {
-    public GameObject npcphone;
-    public GameObject npcfarmer;
-    public GameObject npccafe;
-    public GameObject npcpolice;
-
+    public GameObject[] npcs;
     public DialogueSystem dialogue;
 
+    private int currentNPCIndex = 0;
 
     private void Start()
     {
-        npcphone.SetActive(true);
-        npcfarmer.SetActive(false);
-        npccafe.SetActive(false);
-        npcpolice.SetActive(false);
+        DeactivateAllNPCs();
+        ActivateCurrentNPC();
     }
 
     private void Update()
     {
-        NPCManager();
+        if ((dialogue.isDialoguing == false || dialogue.dialogueFinished) && Input.GetKeyDown(KeyCode.E))
+        {
+            npcs[currentNPCIndex].GetComponent<NPC>().ResetInteraction();
+            currentNPCIndex++;
+
+            if (currentNPCIndex < npcs.Length)
+            {
+                ActivateCurrentNPC();
+            }
+            else
+            {
+                Debug.Log("All NPCs are done!");
+                // Optionally, you can reset the cycle by uncommenting the line below
+                // currentNPCIndex = 0;
+            }
+        }
     }
 
-   public void NPCManager()
-{
-    if (dialogue.isDialoguing == false || dialogue.dialogueFinished)
+    private void ActivateCurrentNPC()
     {
-        if (npcphone.GetComponent<NPC>().phoneActive && dialogue.dialogueFinished)
+        npcs[currentNPCIndex].SetActive(true);
+        npcs[currentNPCIndex].GetComponent<NPC>().enabled = true;
+    }
+
+    private void DeactivateAllNPCs()
+    {
+        foreach (GameObject npc in npcs)
         {
-            npcfarmer.SetActive(true);
-            npcphone.SetActive(false);
-            npcphone.GetComponent<NPC>().ResetInteraction(); // Reset interaction for the phone NPC
-        }
-        if (npcfarmer.GetComponent<NPC>().farmerActive && dialogue.dialogueFinished)
-        {
-            npccafe.SetActive(true);
-            npcfarmer.SetActive(false);
-            npcfarmer.GetComponent<NPC>().ResetInteraction(); // Reset interaction for the farmer NPC
-        }
-        if (npccafe.GetComponent<NPC>().cafeActive && dialogue.dialogueFinished)
-        {
-            npcpolice.SetActive(true);
-            npccafe.SetActive(false);
-            npccafe.GetComponent<NPC>().ResetInteraction(); // Reset interaction for the cafe NPC
-        }
-        if (npcpolice.GetComponent<NPC>().policeActive && dialogue.dialogueFinished)
-        {
-            npcpolice.SetActive(false);
-            npcpolice.GetComponent<NPC>().ResetInteraction(); // Reset interaction for the police NPC
+            npc.SetActive(false);
+            npc.GetComponent<NPC>().enabled = false;
         }
     }
-}
 }

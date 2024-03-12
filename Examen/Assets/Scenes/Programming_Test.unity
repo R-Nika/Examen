@@ -1618,7 +1618,7 @@ MonoBehaviour:
   cafeActive: 0
   phoneActive: 0
   policeActive: 0
-  audio: {fileID: 0}
+  audioNPC: {fileID: 0}
 --- !u!4 &433761559
 Transform:
   m_ObjectHideFlags: 0
@@ -1820,7 +1820,7 @@ MonoBehaviour:
   cafeActive: 0
   phoneActive: 0
   policeActive: 0
-  audio: {fileID: 0}
+  audioNPC: {fileID: 0}
 --- !u!4 &449730844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8384594261443168317, guid: fcc35ea588c06cc419b8c0d814521e22, type: 3}
@@ -3426,11 +3426,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3bb63baad9ea7e49bd3bb1a55933b14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueFinished: 0
+  isDialoguing: 0
   dialogueText: {fileID: 127012460}
   dialoguePanel: {fileID: 342076821}
-  currentDialogueIndex: 0
-  isDialoguing: 0
-  dialogueFinished: 0
 --- !u!4 &844362763
 Transform:
   m_ObjectHideFlags: 0
@@ -4015,7 +4014,7 @@ MonoBehaviour:
   cafeActive: 0
   phoneActive: 0
   policeActive: 0
-  audio: {fileID: 0}
+  audioNPC: {fileID: 0}
 --- !u!4 &953036964
 Transform:
   m_ObjectHideFlags: 0
@@ -5714,15 +5713,15 @@ MonoBehaviour:
   weaponThompson: {fileID: 0}
   weaponRevolver: {fileID: 0}
   crowbar: {fileID: 552647349}
-  currentWeapon: {fileID: 0}
   healthText: {fileID: 0}
   arrestText: {fileID: 1158300847}
   currencyText: {fileID: 1232582588}
   ammoThompsonText: {fileID: 0}
   ammoRevolverText: {fileID: 0}
   gameOverScreen: {fileID: 0}
-  health: 100
-  rb: {fileID: 1430319003}
+  mainCamera: {fileID: 0}
+  cameraPosNormal: {x: 0, y: 1.8, z: 1}
+  cameraPosCrouch: {x: 0, y: 1.6, z: 1}
   moveSpeed: 5
   walkSpeed: 5
   runSpeed: 10
@@ -5732,7 +5731,6 @@ MonoBehaviour:
   isJumping: 0
   canJump: 1
   isRunning: 0
-  mainCamera: {fileID: 0}
   interactionRange: 3
 --- !u!136 &1430318999
 CapsuleCollider:
@@ -7838,10 +7836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd802f550c6af7c41b4bc8c426170000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcphone: {fileID: 1980841388}
-  npcfarmer: {fileID: 442802785}
-  npccafe: {fileID: 953036962}
-  npcpolice: {fileID: 750662990}
+  npcs: []
   dialogue: {fileID: 844362762}
 --- !u!4 &1940062143
 Transform:
@@ -7858,11 +7853,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1980841388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3006171372907016194, guid: 6d7d436e1ddff8041a042e0f12534722, type: 3}
-  m_PrefabInstance: {fileID: 1170773314965735703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1983657733
 GameObject:
   m_ObjectHideFlags: 0
@@ -9103,6 +9093,63 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &1647170842327817497
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5123939748798731486, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_Name
+      value: PR_NPC_Farmer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.87891
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65096235
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.18047
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7706934
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6372062
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -79.168
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498953012642008676, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ecf1c4cbb999a16408ee15a3d3590b2b, type: 3}
 --- !u!114 &1829747339112924246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10634,16 +10681,16 @@ MonoBehaviour:
   damage: 0
   stoppingDistance: 5
   sightRange: 10
+  isWalking: 0
   player: {fileID: 1430319002}
   healthSlider: {fileID: 8224845265146897716}
   enemyAnimator: {fileID: 0}
-  isWalking: 0
-  minion: []
-  projectilePrefab: {fileID: 0}
-  projectileSpawn: {fileID: 0}
   summonInterval: 20
   shootingRange: 10
   bulletsPerShot: 4
+  projectileSpawn: {fileID: 0}
+  minion: []
+  projectilePrefab: {fileID: 0}
 --- !u!224 &8694605822827912321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10712,6 +10759,7 @@ SceneRoots:
   - {fileID: 1430319002}
   - {fileID: 292877622}
   - {fileID: 433761559}
+  - {fileID: 1647170842327817497}
   - {fileID: 442802786}
   - {fileID: 953036964}
   - {fileID: 844362763}
