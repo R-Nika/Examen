@@ -254,24 +254,25 @@ public class Player : MonoBehaviour
 
     private void Crouch()
     {
-        if (Input.GetButtonDown("Left Control") && !isRunning)
+        if (Input.GetButton("Left Control") && !isRunning)
         {
             if (!isCrouching)
             {
                 isCrouching = true;
                 moveSpeed = crouchSpeed;
-                Vector3 newCameraPosition = cameraPosNormal;
-                mainCamera.transform.position = newCameraPosition;
+                Vector3 newCameraPosition = mainCamera.transform.localPosition;
+                newCameraPosition.y -= 0.2f; // Adjust the camera position only on the y-axis
+                mainCamera.transform.localPosition = newCameraPosition;
             }
         }
-        else if (isCrouching) 
+        else if (isCrouching)
         {
             isCrouching = false;
             moveSpeed = isRunning ? runSpeed : walkSpeed;
-            Vector3 originalCameraPosition = cameraPosCrouch;
-            mainCamera.transform.position = originalCameraPosition;
+            Vector3 originalCameraPosition = mainCamera.transform.localPosition;
+            originalCameraPosition.y += 0.2f; // Adjust the camera position back to its original position
+            mainCamera.transform.localPosition = originalCameraPosition;
         }
-
     }
 
     #endregion
