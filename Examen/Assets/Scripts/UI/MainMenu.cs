@@ -29,8 +29,7 @@ public class MainMenu : MonoBehaviour
 
     public void ReferenceLoadMainMenu()
     {
-        fadeAnim.SetTrigger("Fade");
-        Invoke("LoadMainMenu", 1.5f);
+        SceneManager.LoadScene(0);
     }
 
     void LoadMainMenu()
