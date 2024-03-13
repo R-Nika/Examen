@@ -89,8 +89,9 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E))
         {
-            ArrestClosestEnemy();
             Interact();
+            //ArrestClosestEnemy();
+            
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -313,25 +314,25 @@ public class Player : MonoBehaviour
 
     #region Interactions
 
-    public void ArrestClosestEnemy()
-    {
-        int arrestRange = 2;
-        Debug.Log("Arresting");
-        Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
-        foreach (var collider in colliders)
-        {
-            Enemy enemy = collider.GetComponent<Enemy>();
+    //public void ArrestClosestEnemy()
+    //{
+    //    int arrestRange = 2;
+    //    Debug.Log("Arresting");
+    //    Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
+    //    foreach (var collider in colliders)
+    //    {
+    //        Enemy enemy = collider.GetComponent<Enemy>();
 
-            if (enemy != null)
-            {
-                arrestManager.ArrestedEnemy();
-                enemy.Arrest();
-                currency += 10;
+    //        if (enemy != null)
+    //        {
+    //            arrestManager.ArrestedEnemy();
+    //            enemy.Arrest();
+    //            currency += 10;
                
-                break;
-            }
-        }
-    }
+    //            break;
+    //        }
+    //    }
+    //}
 
     public void Interact()
     {
@@ -347,6 +348,17 @@ public class Player : MonoBehaviour
                     {
                         ConsumeItem(item);
                     }
+                }
+
+                Enemy enemy = collider.GetComponent<Enemy>();
+
+                if (enemy != null)
+                {
+                    arrestManager.ArrestedEnemy();
+                    enemy.Arrest();
+                    currency += 10;
+
+                    break;
                 }
             }
         }
