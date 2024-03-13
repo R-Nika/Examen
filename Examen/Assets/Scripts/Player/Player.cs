@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector3.zero; // Stop the player if no movement input
+           // rb.velocity = Vector3.zero; // Stop the player if no movement input
             isWalking = false;
         }
 
@@ -375,9 +375,8 @@ public class Player : MonoBehaviour
         {
             if (health < 100)  
             {
-                int healthToAdd = Mathf.Min(100 - health, item.healthModifyer);
+                int healthToAdd = item.healthModifyer;
                 health += healthToAdd;
-
                 item.gameObject.SetActive(false);
             }
             else
