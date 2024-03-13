@@ -7,7 +7,8 @@ public class EnemyKnife : Enemy
     [Header("Enemy Knife Settings")]
     public float attackInterval = 2f; 
 
-    private float knifeRange = 3;
+    private float knifeRange = 1;
+
     private int knifeDamage = 5;
     private bool isAttacking = false;
 

@@ -80,17 +80,19 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Walking", false);
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+        Run();
+        Crouch();
+    }
     // Update is called once per frame
     void Update()
     {
         healthText.text = health.ToString();
         currencyText.text = currency.ToString();
 
-        Move();
-        Run();
-        Crouch();
         SelectItem();
-
         AnimationManager();
 
         if (Input.GetButtonDown("Interaction"))
@@ -186,29 +188,35 @@ public class Player : MonoBehaviour
     #region Movement
     private void Move()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
-        movement = movement.normalized * moveSpeed * Time.deltaTime;
 
-        isWalking = (new Vector3(horizontal, 0, vertical).magnitude > movementThreshold); // Check if the movement magnitude is greater than the threshold
+        if (movement.magnitude > movementThreshold)
+        {
+            movement = movement.normalized * moveSpeed * Time.deltaTime;
 
-        Debug.Log("Walking: " + isWalking);
+            Quaternion newRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+            rb.MovePosition(rb.position + newRotation * movement);
 
-        Quaternion newRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
-
-        rb.MovePosition(rb.position + newRotation * movement);
+            isWalking = true;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero; // Stop the player if no movement input
+            isWalking = false;
+        }
 
         if (Input.GetButtonDown("Jump") && canJump && jumpcount <= maxJumpcount)
         {
             Debug.Log("Jump");
             jumpcount++;
             isJumping = true;
-            
+
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-      
+
         if (IsGrounded())
         {
             Debug.Log("Grounded");
@@ -240,7 +248,7 @@ public class Player : MonoBehaviour
 
     private void Run()
     {
-        if (Input.GetButtonDown("Left Shift") && !isCrouching)
+        if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             isRunning = true;
             moveSpeed = runSpeed;
@@ -312,7 +320,7 @@ public class Player : MonoBehaviour
 
     public void ArrestClosestEnemy()
     {
-        int arrestRange = 1;
+        int arrestRange = 2;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
         foreach (var collider in colliders)

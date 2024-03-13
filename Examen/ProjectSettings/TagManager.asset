@@ -11,6 +11,7 @@ TagManager:
   - Cafe
   - ItemHealth
   - SecretDoor
+  - Thompson
   layers:
   - Default
   - TransparentFX

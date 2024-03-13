@@ -5,16 +5,13 @@ using TMPro;
 
 public class NPC : MonoBehaviour
 {
-    [Header("Interaction Settings")]
     public string[] npcDialogues;
-    public float interactionRadius = 3f; // Adjust the radius as needed
+    public float interactionRadius = 3f;
     public TMP_Text pressE;
     public DialogueSystem dialogue;
 
     private bool inRange = false;
-
-    //[Header("Audio Settings")]
-    // public AudioSource audioNPC;
+    private bool interactPressed = false;
 
     private void Start()
     {
@@ -24,50 +21,52 @@ public class NPC : MonoBehaviour
     private void Update()
     {
         CheckPlayerInRange();
-        if (inRange /*&& !dialogue.isDialoguing*/) // Check if dialogue is not active to avoid overlapping dialogues
+
+        if (interactPressed && inRange && !dialogue.isDialoguing && dialogue.dialogueFinished)
         {
-            pressE.enabled = true;
-        }
-        else
-        {
-            pressE.enabled = false;
+            dialogue.ResetDialogue();
+            
+            interactPressed = false;
         }
     }
+
 
     private void CheckPlayerInRange()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
+        bool playerInRange = false;
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                inRange = true;
-
-                if (Input.GetButtonDown("Interact"))
-                {
-                    StartInteraction();
-                }
-                if (dialogue.dialogueContinue && dialogue.isDialoguing)
-                {
-                    dialogue.ContinueDialogue();
-                }
-                return;
+                playerInRange = true;
+                break;
             }
         }
-        inRange = false;
+
+        inRange = playerInRange;
+        pressE.enabled = inRange && !dialogue.isDialoguing;
+
+        if (inRange && Input.GetButtonDown("Interact"))
+        {
+            interactPressed = true;
+            Debug.Log("Player in range. Interaction button pressed.");
+           
+            if (dialogue.isDialoguing)
+            {
+                dialogue.ContinueDialogue();
+                
+            }
+            else
+            {
+                dialogue.StartDialogue(npcDialogues);
+            }
+        }
+        
     }
 
-    private void StartInteraction()
-    {
-        dialogue.StartDialogue(npcDialogues);
+    
 
-        //audioNPC.Stop();
-    }
-
-    //public void ResetInteraction()
-    //{
-    //    inRange = false; // Reset inRange flag to allow interaction again
-    //}
 
     private void OnDrawGizmosSelected()
     {

@@ -30,13 +30,23 @@ public class Weapon : MonoBehaviour
             if (!reload)
             {
                 StartCoroutine(Reload());
-
             }
         }
-    
-        if (Input.GetMouseButtonDown(0) && ammoCount > 0 && !shoot)
+
+        if (gameObject.CompareTag("Thompson")) // Check if the GameObject has the "Thompson" tag
         {
-            StartCoroutine(WaitForShoot());
+           
+            if (Input.GetMouseButton(0) && ammoCount > 0 && !shoot) // Changed to GetMouseButton for continuous shooting
+            {
+                StartCoroutine(WaitForShoot());
+            }
+        }
+        else 
+        {
+            if (Input.GetMouseButtonDown(0) && ammoCount > 0 && !shoot)
+            {
+                StartCoroutine(WaitForShoot());
+            }
         }
     }
 
@@ -46,7 +56,7 @@ public class Weapon : MonoBehaviour
         Debug.Log(shoot);
         Shoot();
         shoot_audio.Play();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         shoot = false;
     }
 
@@ -55,10 +65,10 @@ public class Weapon : MonoBehaviour
         reload = true;
         reload_audio.Play();
         ammoCount = maxAmmo;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         reload = false;
     }
-   
+
     public void Shoot()
     {
         GameObject projectileInst = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);

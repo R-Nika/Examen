@@ -36,7 +36,15 @@ public class StoryManager : MonoBehaviour
                 // currentNPCIndex = 0;
             }
         }
+
+        if (dialogue.dialogueFinished)
+        {
+            dialogue.ResetDialogue();
+            Debug.Log("Dialogue system reset.");
+        }
     }
+
+
 
     private void ActivateCurrentNPC()
     {

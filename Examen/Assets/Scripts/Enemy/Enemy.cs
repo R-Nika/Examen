@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        transform.LookAt(player.position);
+
         MoveAndAttack();
     }
 
@@ -47,7 +49,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damage;
         healthSlider.value = health;
-
+        Debug.Log("EnemyTakeDamage");
         if (health <= 0)
         {
             Die();
@@ -77,7 +79,7 @@ public class Enemy : MonoBehaviour
                 Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance;
                 navMeshAgent.SetDestination(newPosition);
 
-                transform.LookAt(player.position);
+               
 
                 isWalking = true;
                 enemyAnimator.SetBool("Walking", true);

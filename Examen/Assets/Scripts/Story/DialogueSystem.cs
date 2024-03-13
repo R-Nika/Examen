@@ -1,22 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-    [Header("Dialogue Settings")]
-    public bool dialogueFinished = false;
     public bool isDialoguing = false;
-    public bool dialogueContinue = false;
+    public bool dialogueFinished = false;
     public TMP_Text dialogueText;
     public GameObject dialoguePanel;
 
     private string[] currentDialogues;
     private int currentDialogueIndex;
-    private bool eKeyPressedLastFrame = false;
-  
+
     private void Start()
     {
         dialoguePanel.SetActive(false);
@@ -27,9 +21,8 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(true);
         currentDialogues = dialogues;
         currentDialogueIndex = 0;
-        dialogueFinished = false;
         isDialoguing = true;
-        //eKeyPressedLastFrame = false;
+        dialogueFinished = false; // Reset dialogueFinished
 
         if (currentDialogues != null && currentDialogues.Length > 0)
         {
@@ -41,33 +34,32 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (isDialoguing)
-        {
-            if (Input.GetButtonDown("Interact")/* && /*!eKeyPressedLastFrame*/)
-            {
-                dialogueContinue = true;
-               // ContinueDialogue();
-            }
-        }
-        // eKeyPressedLastFrame = Input.GetButtonDown("Interact");
-    }
-
     public void ContinueDialogue()
     {
+        currentDialogueIndex++;
         if (currentDialogueIndex < currentDialogues.Length)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
-            currentDialogueIndex++;
         }
         else
         {
-            isDialoguing = false;
-            dialoguePanel.SetActive(false);
-            dialogueFinished = true;
-            currentDialogueIndex = 0;
-            dialogueContinue = false;
+            EndDialogue();
         }
+    }
+
+    private void EndDialogue()
+    {
+        isDialoguing = false;
+        dialoguePanel.SetActive(false);
+        currentDialogueIndex = 0;
+        dialogueFinished = true; // Indicate that dialogue is finished
+    }
+
+    public void ResetDialogue()
+    {
+        isDialoguing = false;
+        dialoguePanel.SetActive(false);
+        currentDialogueIndex = 0;
+        // Other reset logic here...
     }
 }

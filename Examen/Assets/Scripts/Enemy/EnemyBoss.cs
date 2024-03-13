@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 public class EnemyBoss : Enemy
 {
     [Header("Enemy Boss Settings")]
-    public float summonInterval = 3f; 
+    public float summonInterval = 5f; 
     public float shootingRange = 10f;
     public int bulletsPerShot = 4;
     public Transform projectileSpawn;
     public GameObject[] minion;
     public GameObject projectilePrefab;
+    public LayerMask layerMask;
 
     private bool isShooting = false;
     private bool isSummoningMinions = false;
@@ -19,12 +20,13 @@ public class EnemyBoss : Enemy
     public override void Start()
     {
         base.Start();
-        health = 500;
+        
     }
 
     public override void Update()
     {
         base.Update();
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= sightRange && !isSummoningMinions)
@@ -86,20 +88,20 @@ public class EnemyBoss : Enemy
 
     public void SummonMinions()
     {
-        int numberOfMinionsToSpawn = Random.Range(3, 7); 
+        int numberOfMinionsToSpawn = Random.Range(1, 4); 
 
         for (int i = 0; i < numberOfMinionsToSpawn; i++)
         {
             GameObject selectedMinionPrefab = minion[Random.Range(0, minion.Length)];
 
-            Vector3 randomOffset = Random.onUnitSphere * 5f;
+            Vector3 randomOffset = Random.onUnitSphere * 4f;
             Vector3 minionPosition = transform.position + randomOffset;
 
             RaycastHit hit;
-            if (Physics.Raycast(minionPosition + Vector3.up * 10f, Vector3.down, out hit, Mathf.Infinity))
+            if (Physics.Raycast(minionPosition + Vector3.up * 1f, Vector3.down, out hit, Mathf.Infinity, layerMask))
             {
-                if (hit.collider.CompareTag("Floor"))
-                {
+                //if (hit.collider.CompareTag("Floor"))
+                //{
                     minionPosition = hit.point;
 
                     if (Vector3.Distance(minionPosition, transform.position) < 2f)
@@ -107,7 +109,7 @@ public class EnemyBoss : Enemy
                         continue;
                     }
                     Instantiate(selectedMinionPrefab, minionPosition, Quaternion.identity);
-                }
+                //}
             }
         }
     }
@@ -115,6 +117,7 @@ public class EnemyBoss : Enemy
     public override void Die()
     {
         base.Die();
+        
         SceneManager.LoadScene(3);
     }
 }

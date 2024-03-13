@@ -37,6 +37,7 @@ public class Projectile : MonoBehaviour
                 int modifiedDamage = CalculateModifiedDamage();
                 enemy.TakeDamage(modifiedDamage);
             }
+            Destroy(gameObject);
         }
         else if (collision.transform.CompareTag("Player"))
         {
@@ -49,6 +50,7 @@ public class Projectile : MonoBehaviour
                     hitPlayer.TakeDamage(modifiedDamage);
                 }
             }
+            Destroy(gameObject);
         }
 
         Destroy(gameObject);
