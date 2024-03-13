@@ -15,33 +15,29 @@ public class Player : MonoBehaviour
 
     [Header("UI Settings")]
     public TMP_Text healthText;
-    public TMP_Text arrestText;
     public TMP_Text currencyText;
 
     public GameObject ammoThompsonText;
     public GameObject ammoRevolverText;
 
-    public GameObject gameOverScreen;
+    public ArrestUIManager arrestManager;
 
     [Header("Player Settings")]
     private int health = 100;
     private Rigidbody rb;
 
-
     [Header("Movement Settings")]
     public Camera mainCamera;
-    public Vector3 cameraPosNormal = new Vector3(0,1.8f,1);
-    public Vector3 cameraPosCrouch = new Vector3(0,1.6f,1);
-    [SerializeField] private int moveSpeed = 5;
-    [SerializeField] private int walkSpeed = 5;
+    private int moveSpeed = 5;
+    private int walkSpeed = 5;
             
-    [SerializeField] private int runSpeed = 10;
-    [SerializeField] private bool isCrouching = false;
-    [SerializeField] private int crouchSpeed = 2;
-    [SerializeField] private float jumpForce = 4f; 
-    [SerializeField] private bool isJumping = false;
-    [SerializeField] private bool canJump = true; 
-    [SerializeField] private bool isRunning = false;
+    private int runSpeed = 10;
+    private bool isCrouching = false;
+    private int crouchSpeed = 2;
+    private float jumpForce = 4f; 
+    private bool isJumping = false;
+    private bool canJump = true; 
+    private bool isRunning = false;
 
     private int jumpcount = 0; 
     private int maxJumpcount = 2;
@@ -71,11 +67,7 @@ public class Player : MonoBehaviour
         weaponThompson.SetActive(false);
         weaponRevolver.SetActive(false);
         crowbar.SetActive(false);
-
-        arrestText.enabled = false;
-
-        gameOverScreen.SetActive(false);
-
+        
         playerAnimator.SetBool("Idle", true);
         playerAnimator.SetBool("Walking", false);
     }
@@ -95,7 +87,7 @@ public class Player : MonoBehaviour
         SelectItem();
         AnimationManager();
 
-        if (Input.GetButtonDown("Interaction"))
+        if (Input.GetKey(KeyCode.E))
         {
             ArrestClosestEnemy();
             Interact();
@@ -109,8 +101,8 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {          
             Die();
+            Debug.Log("Deaht");
         }
-
     }
 
     IEnumerator PlayJumpAnimation()
@@ -123,7 +115,6 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("Jumping", false);
         isJumping = false;
     }
-
 
     public void SelectItem()
     {
@@ -285,6 +276,8 @@ public class Player : MonoBehaviour
 
     #endregion
 
+    #region Animations
+
     public void AnimationManager()
     {
         playerAnimator.SetBool("Walking", isWalking);
@@ -316,12 +309,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    #endregion
+
     #region Interactions
 
     public void ArrestClosestEnemy()
     {
         int arrestRange = 2;
-
+        Debug.Log("Arresting");
         Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
         foreach (var collider in colliders)
         {
@@ -329,19 +324,13 @@ public class Player : MonoBehaviour
 
             if (enemy != null)
             {
+                arrestManager.ArrestedEnemy();
                 enemy.Arrest();
-                currency += 10;               
-                StartCoroutine(ArrestText());
+                currency += 10;
+               
                 break;
             }
         }
-    }
-
-    public IEnumerator ArrestText()
-    {
-        arrestText.enabled = true;
-        yield return new WaitForSeconds(2f);
-        arrestText.enabled = false;
     }
 
     public void Interact()

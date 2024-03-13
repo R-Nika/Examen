@@ -6,11 +6,13 @@ public class FirstPersonCamera : MonoBehaviour
 {
     [Header("First Person Camera Settings")]
     public bool mouseLook = true;
+    public GameObject pauseMenu;
 
     private float mouseSensitivity = 60f;
     private float rotationSpeed = 5f;
     private float verticalRotationLimit = 80f;
     private float verticalRotation = 0f;
+    private bool pauseActive = false;
     private Transform playerTransform; 
 
     void Start()
@@ -31,6 +33,16 @@ public class FirstPersonCamera : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseActive)
+        {
+            pauseActive = true;
+            mouseLook = false;
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+        }
     }
 
     private void HandleMouseLook()
@@ -43,6 +55,19 @@ public class FirstPersonCamera : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
         playerTransform.Rotate(Vector3.up * mouseX);
+    }
+
+    public void UnPause()
+    {
+        if ( pauseActive)
+        {
+            pauseActive = false;
+            mouseLook = true;
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+        }
     }
 }
 
