@@ -177,10 +177,10 @@ MonoBehaviour:
   damage: 3
   stoppingDistance: 5
   sightRange: 10
+  isWalking: 0
   player: {fileID: 0}
   healthSlider: {fileID: 5012369925895849878}
-  enemyAnimator: {fileID: 0}
-  isWalking: 0
+  enemyAnimator: {fileID: 2921407104486768508}
   attackInterval: 2
 --- !u!4 &7944357545301090463 stripped
 Transform:

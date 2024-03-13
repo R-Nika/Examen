@@ -273,10 +273,10 @@ MonoBehaviour:
   damage: 0
   stoppingDistance: 5
   sightRange: 15
+  isWalking: 0
   player: {fileID: 0}
   healthSlider: {fileID: 8624358637481768512}
-  enemyAnimator: {fileID: 0}
-  isWalking: 0
+  enemyAnimator: {fileID: 8553999161928684509}
 --- !u!95 &8553999161928684509
 Animator:
   serializedVersion: 5

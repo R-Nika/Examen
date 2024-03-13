@@ -551,25 +551,25 @@ MonoBehaviour:
   damage: 5
   stoppingDistance: 5
   sightRange: 10
+  isWalking: 0
   player: {fileID: 0}
   healthSlider: {fileID: 552097980859632938}
   enemyAnimator: {fileID: 2342379879521815141}
-  isWalking: 0
-  minion:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  projectilePrefab: {fileID: 6589817048324132125, guid: 501982ed8a9742146a84d3335dfe381b, type: 3}
-  projectileSpawn: {fileID: 8126710297900229116}
   summonInterval: 15
   shootingRange: 10
   bulletsPerShot: 1
+  projectileSpawn: {fileID: 8126710297900229116}
+  minion:
+  - {fileID: 7470938844448136662, guid: 5217fc5114b14e946bd437c0f1209b97, type: 3}
+  - {fileID: 1693194793392995990, guid: 62c0f1f7e7af5e5478e7b843ddad2068, type: 3}
+  - {fileID: 4956790006192200523, guid: 181a28577632a4d4f9df80ce4df715ee, type: 3}
+  - {fileID: 3380127354701179480, guid: fe9a8d32955d1a34f97815ceec0d6d68, type: 3}
+  - {fileID: 2188580299744455934, guid: b8be036cb6376e2489fcdf6a58b6b189, type: 3}
+  - {fileID: 5201132096305058162, guid: eed24a1e9b127264c9a557deb95fd917, type: 3}
+  projectilePrefab: {fileID: 6589817048324132125, guid: 501982ed8a9742146a84d3335dfe381b, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &8332322682570748889
 BoxCollider:
   m_ObjectHideFlags: 0
