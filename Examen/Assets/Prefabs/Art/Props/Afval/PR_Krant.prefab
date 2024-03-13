@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.0257797
+      value: 2.8053632
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.994333
+      value: 0.78734446
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,10 +51,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6cb49bf0926dd4f4b924b8beffbbf310, type: 2}
+      objectReference: {fileID: 2100000, guid: fe2e023a555803d40b7e9c3dd733ff4f, type: 2}
     - target: {fileID: 919132149155446097, guid: ab58a9d722db2024088c5c649fd9facd, type: 3}
       propertyPath: m_Name
-      value: Krant
+      value: PR_Krant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

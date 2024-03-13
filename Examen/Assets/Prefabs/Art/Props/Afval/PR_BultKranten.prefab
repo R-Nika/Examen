@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40543f899f54ec3468a7b24b4d50bddd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 40543f899f54ec3468a7b24b4d50bddd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 40543f899f54ec3468a7b24b4d50bddd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1c209a567c440554eb4785ba259fc64a, type: 2}
+      objectReference: {fileID: 2100000, guid: dca5c5b3418193d4ca7a4fd8c2f3344d, type: 2}
     - target: {fileID: 919132149155446097, guid: 40543f899f54ec3468a7b24b4d50bddd, type: 3}
       propertyPath: m_Name
       value: BultKrantenLos
@@ -76,15 +76,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 417a01faf595a9d4289091a9b290a27f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4295444
+      value: 1.3734517
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417a01faf595a9d4289091a9b290a27f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.071929656
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417a01faf595a9d4289091a9b290a27f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.145235
+      value: 0.939548
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 417a01faf595a9d4289091a9b290a27f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -120,7 +120,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 88e8527784e46214f80dc314d183b76e, type: 2}
     - target: {fileID: 919132149155446097, guid: 417a01faf595a9d4289091a9b290a27f, type: 3}
       propertyPath: m_Name
-      value: BultKranten
+      value: PR_BultKranten
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
