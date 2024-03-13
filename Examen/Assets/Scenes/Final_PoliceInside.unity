@@ -2559,7 +2559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4108289843681457625, guid: 54a4dbd895b5be145892282f62493729, type: 3}
       propertyPath: m_text
-      value: Exit the police station and talk to the farmer.
+      value: Exit the police station and visit Greg's Grocery Store.
       objectReference: {fileID: 0}
     - target: {fileID: 4108289843681457625, guid: 54a4dbd895b5be145892282f62493729, type: 3}
       propertyPath: m_fontSize
@@ -2676,6 +2676,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 81754648}
+    - target: {fileID: 3155296650704596954, guid: 6d7d436e1ddff8041a042e0f12534722, type: 3}
+      propertyPath: npcDialogues.Array.data[7]
+      value: Your first hint is "Greg's Groceries''
+      objectReference: {fileID: 0}
     - target: {fileID: 8138605578481463873, guid: 6d7d436e1ddff8041a042e0f12534722, type: 3}
       propertyPath: m_Volume
       value: 0.482
