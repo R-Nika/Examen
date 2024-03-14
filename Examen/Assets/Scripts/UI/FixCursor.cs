@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FixCursor : MonoBehaviour
 {
+    //
+    // SCRIPT GEMAAKT DOOR ROBERT
+    //
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;

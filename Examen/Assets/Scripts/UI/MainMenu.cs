@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] Animator fadeAnim;

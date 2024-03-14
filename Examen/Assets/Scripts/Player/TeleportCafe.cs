@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
 public class TeleportCafe : MonoBehaviour
 {
     [SerializeField] Transform teleportPos;

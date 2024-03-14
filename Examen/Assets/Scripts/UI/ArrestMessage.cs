@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
+
 public class ArrestMessage : MonoBehaviour
 {
     float timer = 3;

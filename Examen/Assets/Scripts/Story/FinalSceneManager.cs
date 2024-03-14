@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
+
 public class FinalSceneManager : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
 public class ArrestUIManager : MonoBehaviour
 {
     [SerializeField] GameObject arrestMessage;

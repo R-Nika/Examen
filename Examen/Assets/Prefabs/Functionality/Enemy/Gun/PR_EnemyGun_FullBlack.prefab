@@ -414,13 +414,13 @@ MonoBehaviour:
   damage: 0
   stoppingDistance: 5
   sightRange: 10
+  isWalking: 0
   player: {fileID: 0}
   healthSlider: {fileID: 2877042661254484058}
   enemyAnimator: {fileID: 9210527770916210758}
-  isWalking: 0
-  projectilePrefab: {fileID: 6589817048324132125, guid: 501982ed8a9742146a84d3335dfe381b, type: 3}
-  projectileSpawn: {fileID: 6275250406264583949}
   shootingRange: 10
+  projectileSpawn: {fileID: 6275250406264583949}
+  projectilePrefab: {fileID: 6589817048324132125, guid: 501982ed8a9742146a84d3335dfe381b, type: 3}
 --- !u!4 &5729104924000289265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 72a5b932410fb284c972f5f49366318f, type: 3}

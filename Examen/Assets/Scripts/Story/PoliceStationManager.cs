@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//
+// SCRIPT GEMAAKT DOOR ROBERT
+//
+
 public class PoliceStationManager : MonoBehaviour
 {
     [SerializeField] DialogueSystem dialogueSystem;
@@ -13,7 +17,7 @@ public class PoliceStationManager : MonoBehaviour
     bool check = true;
     private void Update()
     {
-        if (dialogueSystem.isDialoguing) {
+        if (dialogueSystem.isInDialogue) {
             phone.Stop();
         }
 
