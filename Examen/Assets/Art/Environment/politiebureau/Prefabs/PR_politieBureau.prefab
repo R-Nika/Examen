@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9219496819267950069}
   - component: {fileID: 64607573299382903}
   - component: {fileID: 1013120625877540638}
+  - component: {fileID: 274549925468420157}
   m_Layer: 0
   m_Name: PolitieBureau_Top (4)
   m_TagString: Untagged
@@ -84,6 +85,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &274549925468420157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23375885697310941}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.577042, y: 3.16292, z: 20.370556}
+  m_Center: {x: 0, y: 16.331459, z: -9.494471}
 --- !u!1 &1926423966137005956
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +117,7 @@ GameObject:
   - component: {fileID: 7235526118905680846}
   - component: {fileID: 786707926414146942}
   - component: {fileID: 8439977361454747320}
+  - component: {fileID: 3395326057915706409}
   m_Layer: 0
   m_Name: PolitieBureau_Top
   m_TagString: Untagged
@@ -168,6 +191,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3395326057915706409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926423966137005956}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.577042, y: 3.16292, z: 20.370556}
+  m_Center: {x: 0, y: 16.331459, z: -9.494471}
 --- !u!1 &2376577623638181997
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +223,7 @@ GameObject:
   - component: {fileID: 4458139516141915080}
   - component: {fileID: 8116211201088894604}
   - component: {fileID: 3787900852474926480}
+  - component: {fileID: 304829968565365919}
   m_Layer: 0
   m_Name: PolitieBureau_Top (1)
   m_TagString: Untagged
@@ -252,6 +297,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &304829968565365919
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2376577623638181997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.577042, y: 3.16292, z: 20.370556}
+  m_Center: {x: 0, y: 16.331459, z: -9.494471}
 --- !u!1 &5037608899510691366
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +329,7 @@ GameObject:
   - component: {fileID: 2551504547443737487}
   - component: {fileID: 2106808101743900697}
   - component: {fileID: 526764748625394466}
+  - component: {fileID: 3460871543746900318}
   m_Layer: 0
   m_Name: PolitieBureau_Top (3)
   m_TagString: Untagged
@@ -336,6 +403,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3460871543746900318
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5037608899510691366}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.577042, y: 3.16292, z: 20.370556}
+  m_Center: {x: 0, y: 16.331459, z: -9.494471}
 --- !u!1 &6373267210792387158
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +435,7 @@ GameObject:
   - component: {fileID: 5518835403143790274}
   - component: {fileID: 7611956602922765091}
   - component: {fileID: 2897508218127250869}
+  - component: {fileID: 4199755830964496876}
   m_Layer: 0
   m_Name: PolitieBureau_Low
   m_TagString: Untagged
@@ -420,6 +509,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4199755830964496876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373267210792387158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.703602, y: 14.913342, z: 20.796612}
+  m_Center: {x: 0, y: 7.456671, z: -9.494471}
 --- !u!1 &7573178841054711496
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +541,7 @@ GameObject:
   - component: {fileID: 1485406854170662869}
   - component: {fileID: 5967118820889515564}
   - component: {fileID: 3352909587805371643}
+  - component: {fileID: 7373296650956592217}
   m_Layer: 0
   m_Name: PolitieBureau_Door
   m_TagString: Untagged
@@ -503,6 +614,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7373296650956592217
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573178841054711496}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.635092, y: 3.1438994, z: 0.08259613}
+  m_Center: {x: 0, y: 1.5719497, z: 0.036404524}
 --- !u!1 &8139348383603153407
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +646,7 @@ GameObject:
   - component: {fileID: 3306080968794003814}
   - component: {fileID: 4158686917140719199}
   - component: {fileID: 974006431125555983}
+  - component: {fileID: 1334882228180062733}
   m_Layer: 0
   m_Name: PolitieBureau_Top (2)
   m_TagString: Untagged
@@ -587,6 +720,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1334882228180062733
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8139348383603153407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 26.577042, y: 3.16292, z: 20.370556}
+  m_Center: {x: 0, y: 16.331459, z: -9.494471}
 --- !u!1 &8942640104325877317
 GameObject:
   m_ObjectHideFlags: 0
