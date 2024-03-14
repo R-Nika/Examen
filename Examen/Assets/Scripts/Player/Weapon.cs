@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//
+//
+// Created/Written by: Amy van Oosten
+//
+//
+
 public class Weapon : MonoBehaviour
 {
     [Header("Projectile Settings")]
     public GameObject projectile;
     public Transform projectileSpawn;
     public int projectileForce = 40;
-    public bool shoot = false;
+    public bool isShooting = false;
     public TMP_Text ammocountText;
 
     [Header("Ammo Settings")]
-    public bool reload = false;
+    public bool isReloading = false;
     [SerializeField] private int ammoCount = 10;
     [SerializeField] private int maxAmmo = 10;
 
@@ -27,52 +33,54 @@ public class Weapon : MonoBehaviour
 
         if (Input.GetButtonDown("Reload"))
         {
-            if (!reload)
+            if (!isReloading)
             {
                 StartCoroutine(Reload());
             }
         }
-
-        if (gameObject.CompareTag("Thompson")) // Check if the GameObject has the "Thompson" tag
+        // Check if gun has enough Ammo
+        bool hasRemainingAmmo = ammoCount > 0;
+        if (gameObject.CompareTag("Thompson")) 
         {
            
-            if (Input.GetMouseButton(0) && ammoCount > 0 && !shoot) // Changed to GetMouseButton for continuous shooting
+            if (Input.GetMouseButton(0) && hasRemainingAmmo && !isShooting) // Changed for continuous shooting
             {
                 StartCoroutine(WaitForShoot());
             }
         }
         else 
         {
-            if (Input.GetMouseButtonDown(0) && ammoCount > 0 && !shoot)
+            if (Input.GetMouseButtonDown(0) && hasRemainingAmmo && !isShooting)
             {
                 StartCoroutine(WaitForShoot());
             }
         }
     }
 
+    // Coroutine for a delay in shooting
     public IEnumerator WaitForShoot()
     {
-        shoot = true;
-        Debug.Log(shoot);
+        isShooting = true;
+        Debug.Log(isShooting);
         Shoot();
         shoot_audio.Play();
         yield return new WaitForSeconds(0.1f);
-        shoot = false;
+        isShooting = false;
     }
 
     public IEnumerator Reload()
     {
-        reload = true;
+        isReloading = true;
         reload_audio.Play();
+        //Reload Ammo
         ammoCount = maxAmmo;
         yield return new WaitForSeconds(0.1f);
-        reload = false;
+        isReloading = false;
     }
 
     public void Shoot()
     {
         GameObject projectileInst = Instantiate(projectile, projectileSpawn.position, projectileSpawn.rotation);
-
         Rigidbody projectileRb = projectileInst.GetComponent<Rigidbody>();
         if (projectileRb != null)
         {

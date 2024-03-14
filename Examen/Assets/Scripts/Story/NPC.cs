@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//
+//
+// Created/Written by: Amy van Oosten
+//
+//
+
 public class NPC : MonoBehaviour
 {
     public string[] npcDialogues;
@@ -15,62 +21,61 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
-        pressE.enabled = false;
+        pressE.enabled = false; 
     }
 
     private void Update()
     {
-        CheckPlayerInRange();
+        CheckPlayerInRange(); 
 
-        if (interactPressed && inRange && !dialogue.isDialoguing && dialogue.dialogueFinished)
+        if (interactPressed && inRange && !dialogue.isInDialogue && dialogue.dialogueFinished)
         {
-            dialogue.ResetDialogue();
-            
-            interactPressed = false;
+            dialogue.ResetDialogue(); 
+            interactPressed = false; 
         }
     }
 
-
+    // Method to check if the player is in range
     private void CheckPlayerInRange()
     {
+        // Use OverlapSphere to find colliders within the interaction radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRadius);
         bool playerInRange = false;
+
         foreach (Collider collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                playerInRange = true;
-                break;
+                playerInRange = true; 
+                break; // Exit the loop since player is found
             }
         }
 
+        // Update the inRange and enable/disable pressE accordingly
         inRange = playerInRange;
-        pressE.enabled = inRange && !dialogue.isDialoguing;
+        pressE.enabled = inRange && !dialogue.isInDialogue;
 
         if (inRange && Input.GetButtonDown("Interact"))
         {
-            interactPressed = true;
+            interactPressed = true; 
             Debug.Log("Player in range. Interaction button pressed.");
-           
-            if (dialogue.isDialoguing)
+
+            // If the dialogue system is in dialogue, continue the dialogue; otherwise, start a new dialogue
+            if (dialogue.isInDialogue)
             {
-                dialogue.ContinueDialogue();
-                
+                dialogue.ContinueDialogue(); 
             }
             else
             {
                 dialogue.StartDialogue(npcDialogues);
             }
         }
-        
     }
 
-    
-
-
+    // Method to draw a wire sphere representing the interaction radius in the scene view
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactionRadius);
+        Gizmos.color = Color.yellow; 
+        Gizmos.DrawWireSphere(transform.position, interactionRadius); 
     }
 }

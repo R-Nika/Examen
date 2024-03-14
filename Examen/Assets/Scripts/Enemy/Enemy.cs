@@ -5,6 +5,12 @@ using UnityEngine.AI;
 using TMPro;
 using UnityEngine.UI;
 
+//
+//
+// Created/Written by: Amy van Oosten
+//
+//
+
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Base Settings")]
@@ -21,8 +27,8 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     public virtual void Start()
-    {       
-        navMeshAgent = GetComponent<NavMeshAgent>();
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>(); 
         enemyAnimator = GetComponent<Animator>();
 
         GameObject playerObject = GameObject.FindWithTag("Player");
@@ -32,7 +38,7 @@ public class Enemy : MonoBehaviour
             player = playerObject.transform;
         }
         else
-        {
+        {            
             Debug.LogError("Player GameObject not found with tag 'Player'. Make sure the player has the correct tag.");
         }
     }
@@ -40,67 +46,64 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
+        // Make the enemy look at the player's position
         transform.LookAt(player.position);
 
         MoveAndAttack();
     }
 
+    // Method to handle taking damage
     public virtual void TakeDamage(int damage)
     {
-        health -= damage;
-        healthSlider.value = health;
+        health = Mathf.Max(health - damage, 0); //This so that it will not go below 0
+        healthSlider.value = health; 
         Debug.Log("EnemyTakeDamage");
-        if (health <= 0)
+
+        if (health == 0)
         {
-            Die();
+            Die(); 
         }
     }
 
+    // Method to handle enemy death
     public virtual void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); 
     }
 
     public void MoveAndAttack()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position); // Calculate the distance to the player
 
-        if (distanceToPlayer <= sightRange)
+        bool PlayerInSight = distanceToPlayer <= sightRange;
+        bool PlayerNearEnemy = distanceToPlayer <= stoppingDistance;
+        if (PlayerInSight && !PlayerNearEnemy)
         {
-            if (distanceToPlayer <= stoppingDistance)
-            {
-                navMeshAgent.ResetPath();
-                isWalking = false;
-                enemyAnimator.SetBool("Walking", false);
-            }
-            else
-            {
-                Vector3 directionToPlayer = player.position - transform.position;
-                Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance;
-                navMeshAgent.SetDestination(newPosition);
+            // If the player is outside the stopping distance, move towards the player
+            Vector3 directionToPlayer = player.position - transform.position; // Calculate the direction to the player
+            Vector3 newPosition = player.position - directionToPlayer.normalized * stoppingDistance; // Calculate the new position to move towards
+            navMeshAgent.SetDestination(newPosition); // Set the destination 
 
-               
-
-                isWalking = true;
-                enemyAnimator.SetBool("Walking", true);
-            }
+            isWalking = true; 
+            enemyAnimator.SetBool("Walking", true); 
         }
         else
         {
+            // If the player is outside the sight range or very close to this enemy, stop moving towards the player
             navMeshAgent.ResetPath();
-            isWalking = false;
-            enemyAnimator.SetBool("Walking", false);
+            isWalking = false; 
+            enemyAnimator.SetBool("Walking", false); 
         }
     }
 
     public virtual IEnumerator AttackRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f); 
     }
 
     public void Arrest()
     {
-        Debug.Log("Arrested");
-        Destroy(gameObject);
+        Debug.Log("Arrested"); 
+        Destroy(gameObject); 
     }
 }

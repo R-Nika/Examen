@@ -1,9 +1,15 @@
 using UnityEngine;
 using TMPro;
 
+//
+//
+// Created/Written by: Amy van Oosten
+//
+//
+
 public class DialogueSystem : MonoBehaviour
 {
-    public bool isDialoguing = false;
+    public bool isInDialogue = false;
     public bool dialogueFinished = false;
     public TMP_Text dialogueText;
     public GameObject dialoguePanel;
@@ -12,31 +18,36 @@ public class DialogueSystem : MonoBehaviour
     private int currentDialogueIndex;
 
     private void Start()
-    {
+    {     
         dialoguePanel.SetActive(false);
     }
 
     public void StartDialogue(string[] dialogues)
-    {
+    {       
         dialoguePanel.SetActive(true);
+        
         currentDialogues = dialogues;
         currentDialogueIndex = 0;
-        isDialoguing = true;
-        dialogueFinished = false; // Reset dialogueFinished
 
+        isInDialogue = true;
+        dialogueFinished = false; 
+
+        // Display the first dialogue line if there are dialogues available
         if (currentDialogues != null && currentDialogues.Length > 0)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
         }
         else
-        {
+        {          
             Debug.LogWarning("Dialogue array is null or empty.");
         }
     }
 
     public void ContinueDialogue()
-    {
+    {      
         currentDialogueIndex++;
+
+        // If there are more dialogues, display the next one; otherwise, end the dialogue
         if (currentDialogueIndex < currentDialogues.Length)
         {
             dialogueText.text = currentDialogues[currentDialogueIndex];
@@ -49,17 +60,20 @@ public class DialogueSystem : MonoBehaviour
 
     private void EndDialogue()
     {
-        isDialoguing = false;
+        // Update dialogue state and deactivate dialogue panel
+        isInDialogue = false;
         dialoguePanel.SetActive(false);
+
+        // Reset dialogue index and set dialogueFinished 
         currentDialogueIndex = 0;
-        dialogueFinished = true; // Indicate that dialogue is finished
+        dialogueFinished = true; 
     }
 
     public void ResetDialogue()
     {
-        isDialoguing = false;
+        // Reset dialogue state and deactivate dialogue panel and reset index
+        isInDialogue = false;
         dialoguePanel.SetActive(false);
-        currentDialogueIndex = 0;
-        // Other reset logic here...
+        currentDialogueIndex = 0;   
     }
 }

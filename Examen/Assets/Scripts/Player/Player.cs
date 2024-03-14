@@ -4,6 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+//
+//
+// Created/Written by: Amy van Oosten
+//
+//
+
 public class Player : MonoBehaviour
 {
     [Header("Weapon & Currency Settings")]
@@ -24,6 +30,7 @@ public class Player : MonoBehaviour
 
     [Header("Player Settings")]
     private int health = 100;
+    private int maxHealth = 100;
     private Rigidbody rb;
 
     [Header("Movement Settings")]
@@ -35,7 +42,6 @@ public class Player : MonoBehaviour
     private bool isCrouching = false;
     private int crouchSpeed = 2;
     private float jumpForce = 4f; 
-    private bool isJumping = false;
     private bool canJump = true; 
     private bool isRunning = false;
 
@@ -56,20 +62,19 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialization of variables
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-
-        ammoThompsonText.SetActive( false);
+        ammoThompsonText.SetActive(false);
         ammoRevolverText.SetActive(false);
-
         currentWeapon = weaponThompson;
-
         weaponThompson.SetActive(false);
         weaponRevolver.SetActive(false);
         crowbar.SetActive(false);
-        
         playerAnimator.SetBool("Idle", true);
         playerAnimator.SetBool("Walking", false);
+
+        health = maxHealth;
     }
 
     private void FixedUpdate()
@@ -78,45 +83,44 @@ public class Player : MonoBehaviour
         Run();
         Crouch();
     }
+
     // Update is called once per frame
     void Update()
     {
+        // Update UI elements
         healthText.text = health.ToString();
         currencyText.text = currency.ToString();
 
+        // Select weapons based on input
         SelectItem();
-        AnimationManager();
 
+        // Manage animations and interactions
+        UpdateAnimationState();
         if (Input.GetKey(KeyCode.E))
         {
             Interact();
-            //ArrestClosestEnemy();
-            
         }
-
         if (Input.GetButtonDown("Jump"))
         {
             StartCoroutine(PlayJumpAnimation());
         }
-
         if (health <= 0)
-        {          
+        {
             Die();
-            Debug.Log("Deaht");
         }
     }
 
+    //Handles Jump Animation
     IEnumerator PlayJumpAnimation()
     {
-        isJumping = true;
         playerAnimator.SetBool("Jumping", true);
 
         yield return new WaitForSeconds(0.3f);
 
         playerAnimator.SetBool("Jumping", false);
-        isJumping = false;
     }
 
+    //Select current weapon/item 
     public void SelectItem()
     {
         if (Input.GetButtonDown("Select1"))
@@ -125,7 +129,8 @@ public class Player : MonoBehaviour
            
             ammoThompsonText.SetActive(true);
             ammoRevolverText.SetActive(false);
-            
+
+            //Handle weapon animations
             playerAnimator.SetBool("GunHolding", false);
             playerAnimator.SetBool("ThompsonHolding", true);
 
@@ -139,7 +144,8 @@ public class Player : MonoBehaviour
 
             ammoThompsonText.SetActive(false);
             ammoRevolverText.SetActive(true);
-          
+            
+            //Handle weapon animations
             playerAnimator.SetBool("GunHolding", true);
             playerAnimator.SetBool("ThompsonHolding", false);
 
@@ -154,6 +160,7 @@ public class Player : MonoBehaviour
             ammoThompsonText.SetActive(false);
             ammoRevolverText.SetActive(false);
 
+            //Handle weapon animations
             playerAnimator.SetBool("GunHolding", false);
             playerAnimator.SetBool("ThompsonHolding", false);
 
@@ -167,49 +174,49 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        health -= amount;
+        health = Mathf.Max(health - amount, 0); //This so that the health will never be lower then 0 when damage is done
     }
 
     private void Die()
     {
-        Debug.Log("Player has died!");
         SceneManager.LoadScene(2);
     }
     #endregion
 
     #region Movement
+
+    //Method for Movement of the Player
     private void Move()
     {
+        // Get input for horizontal and vertical movement
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        // Vector representing the movement direction
         Vector3 movement = new Vector3(horizontal, 0, vertical);
 
-        if (movement.magnitude > movementThreshold)
+        isWalking = movement.magnitude > movementThreshold;
+        if (isWalking)
         {
+            // Normalize and scale the movement vector by moveSpeed and deltaTime
             movement = movement.normalized * moveSpeed * Time.deltaTime;
 
+            // Calculate the new rotation based on the player's current rotation
             Quaternion newRotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
-            rb.MovePosition(rb.position + newRotation * movement);
 
-            isWalking = true;
-        }
-        else
-        {
-           // rb.velocity = Vector3.zero; // Stop the player if no movement input
-            isWalking = false;
+            // Move the player's rigidbody to the new position
+            rb.MovePosition(rb.position + newRotation * movement);
         }
 
         if (Input.GetButtonDown("Jump") && canJump && jumpcount <= maxJumpcount)
         {
             Debug.Log("Jump");
             jumpcount++;
-            isJumping = true;
-
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        if (IsGrounded())
+        // Check if the player is grounded
+        if (isGrounded)
         {
             Debug.Log("Grounded");
             jumpcount = 0;
@@ -231,11 +238,6 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
-
-    private bool IsGrounded()
-    {
-        return isGrounded;
     }
 
     private void Run()
@@ -279,7 +281,7 @@ public class Player : MonoBehaviour
 
     #region Animations
 
-    public void AnimationManager()
+    public void UpdateAnimationState()
     {
         playerAnimator.SetBool("Walking", isWalking);
         playerAnimator.SetBool("Idle", !isWalking);
@@ -300,13 +302,9 @@ public class Player : MonoBehaviour
 
         if (weaponComponent != null)
         {
-            playerAnimator.SetBool(reloadParam, weaponComponent.reload);
-            playerAnimator.SetBool(shootParam, weaponComponent.shoot);
+            playerAnimator.SetBool(reloadParam, weaponComponent.isReloading);
+            playerAnimator.SetBool(shootParam, weaponComponent.isShooting);
 
-            if (weaponComponent.reload)
-            {
-                Debug.Log($"Anim {weapon.name} Reload");
-            }
         }
     }
 
@@ -314,43 +312,23 @@ public class Player : MonoBehaviour
 
     #region Interactions
 
-    //public void ArrestClosestEnemy()
-    //{
-    //    int arrestRange = 2;
-    //    Debug.Log("Arresting");
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position, arrestRange);
-    //    foreach (var collider in colliders)
-    //    {
-    //        Enemy enemy = collider.GetComponent<Enemy>();
-
-    //        if (enemy != null)
-    //        {
-    //            arrestManager.ArrestedEnemy();
-    //            enemy.Arrest();
-    //            currency += 10;
-               
-    //            break;
-    //        }
-    //    }
-    //}
-
     public void Interact()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRange);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, interactionRange); 
         if (colliders.Length > 0)
         {
             foreach (var collider in colliders)
             {
-                if (collider.CompareTag("ItemHealth"))
+                if (collider.CompareTag("ItemHealth")) // If ItemHealth is in range, Consume Item
                 {
                     Item item = collider.GetComponent<Item>();
                     if (item != null)
                     {
-                        ConsumeItem(item);
+                        ConsumeItem(item); 
                     }
                 }
 
-                Enemy enemy = collider.GetComponent<Enemy>();
+                Enemy enemy = collider.GetComponent<Enemy>(); // If Enemy is in range, Arrest Enemy
 
                 if (enemy != null)
                 {
@@ -370,13 +348,13 @@ public class Player : MonoBehaviour
     }
 
     void ConsumeItem(Item item)
-    {
+    {        
         if (item.itemtype == ItemType.HealthItem)
         {
-            if (health < 100)  
+            if (health < maxHealth)  
             {
                 int healthToAdd = item.healthModifyer;
-                health += healthToAdd;
+                health = Mathf.Min(health + healthToAdd, maxHealth); //This so that the added health by the Item won't exceed maximum health
                 item.gameObject.SetActive(false);
             }
             else
